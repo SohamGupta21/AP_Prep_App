@@ -73,19 +73,19 @@ public class AddWrittenQuestionsController {
         //add all of the mcqs
         String mcqString = "";
         for(MCQ m : course.getMcqs()){
-            mcqString = mcqString + (mcqManager.getRowsOfTable() + 1) + ",";
+            mcqString = mcqString + (mcqManager.getRowsOfTable() + 1) + "*";
             mcqManager.databaseRegistration(course.getName(),m.getUnit(), m.getQues(), m.getA(), m.getB(), m.getC(), m.getD(), m.getCorrectChoice());
         }
         //add all of the written questions
         String writtenString = "";
         for(WrittenQuestion w : course.getWrittenQuestions()){
-            writtenString = writtenString + (writtenManager.getRowsOfTable() + 1) + ",";
+            writtenString = writtenString + (writtenManager.getRowsOfTable() + 1) + "*";
             writtenManager.databaseRegistration(course.getName(), w.getUnit(), w.getPrompt());
         }
         //create all of the units and add it to the database with a reference to the questions
         String unitString = "";
         for(Unit u : course.getUnits()){
-            unitString = unitString + (unitManager.getRowsOfTable() + 1) + ",";
+            unitString = unitString + (unitManager.getRowsOfTable() + 1) + "*";
             unitManager.databaseRegistration(u.getName(), writtenString, mcqString);
         }
         //create the course and add it to the database with a reference to the units

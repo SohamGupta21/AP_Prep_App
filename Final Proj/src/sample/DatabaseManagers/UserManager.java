@@ -1,4 +1,6 @@
 package sample.DatabaseManagers;
+import sample.Objects.User;
+
 import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.*;
 import java.util.ArrayList;
@@ -217,8 +219,7 @@ public class UserManager {
         return answer;
     }
 
-    public String[] getUserData(int userId){
-        String[] answer = new String[4];
+    public User getUserData(int userId){
         Connection conn = null;
         Statement stmt = null;
 
@@ -241,10 +242,8 @@ public class UserManager {
                 //Retrieve by column name
                 int idUsers  = rs.getInt("idUsers");
                 if(idUsers == userId){
-                    answer[0] = Integer.toString(rs.getInt("idUsers"));
-                    answer[1] = rs.getString("username");
-                    answer[2] = rs.getString("courses");
-                    answer[3] = rs.getString("classmates");
+                    User answer = new User(idUsers, rs.getString("username"), rs.getString("courses"), rs.getString("classmates"));
+                    return answer;
                 }
             }
             //STEP 6: Clean-up environment
@@ -270,7 +269,7 @@ public class UserManager {
                 se.printStackTrace();
             }
         }
-        return answer;
+        return null;
     }
 
     public void addCourseToUser(int userId, int courseId){

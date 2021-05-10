@@ -1,6 +1,11 @@
 package sample.Objects;
 
+import com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform;
 import javafx.scene.control.PasswordField;
+import sample.DatabaseManagers.MCQManager;
+import sample.DatabaseManagers.UnitManager;
+import sample.DatabaseManagers.UserManager;
+import sample.DatabaseManagers.WrittenManager;
 
 import java.util.ArrayList;
 
@@ -10,10 +15,44 @@ public class Course {
     private ArrayList<Unit> units = new ArrayList<>();
     private ArrayList<MCQ> mcqs = new ArrayList<>();
     private ArrayList<WrittenQuestion> writtenQuestions = new ArrayList<>();
+    private ArrayList<User> members = new ArrayList<>();
 
     public Course(String name, String testDate){
         this.name = name;
         this.testDate = testDate;
+    }
+
+    public Course(String name, String testDate, String units, String mcqs, String writtenQuestions, String members){
+        this.name = name;
+        this.testDate = testDate;
+        MCQManager mcqManager = new MCQManager();
+        for(String m : splitString(mcqs)){
+            this.mcqs.add(mcqManager.getMCQByID(Integer.parseInt(m)));
+        }
+        UnitManager unitManager = new UnitManager();
+        for(String u : splitString(units)){
+            this.units.add(unitManager.getUnitById(Integer.parseInt(u)));
+        }
+        WrittenManager writtenManager = new WrittenManager();
+        for(String w : splitString(writtenQuestions)){
+            this.writtenQuestions.add(writtenManager.getWrittenById(Integer.parseInt(w)));
+        }
+        UserManager userManager = new UserManager();
+        for(String m : splitString(members)){
+            this.members.add(userManager.getUserData(Integer.parseInt(m)));
+        }
+    }
+
+    private ArrayList<String> splitString(String s){
+        ArrayList<String> answer = new ArrayList<>();
+        while(s.length() > 0){
+            answer.add(s.substring(0, s.indexOf("*")));
+            if(s.indexOf("*") + 1 > s.length() - 1){
+                break;
+            }
+            s = s.substring(s.indexOf("*") + 1);
+        }
+        return answer;
     }
 
     public void addUnits(ArrayList<Unit> unitsIn){

@@ -1,16 +1,16 @@
 package sample.Objects;
 
 public class MCQ {
-    private String course;
-    private String unit;
-    private String ques;
-    private String A;
-    private String B;
-    private String C;
-    private String D;
-    private String correctChoice;
+    private final String course;
+    private final String unit;
+    private final String ques;
+    private final String A;
+    private final String B;
+    private final String C;
+    private final String D;
+    private final String correctChoice;
 
-    public MCQ(String course,String unit, String ques, String A, String B, String C, String D, String correctChoice){
+    public MCQ(String course, String unit, String ques, String A, String B, String C, String D, String correctChoice) {
         this.course = course;
         this.unit = unit;
         this.ques = ques;
@@ -21,28 +21,31 @@ public class MCQ {
         this.correctChoice = correctChoice;
     }
 
-    public String getUnit(){
+    public String getUnit() {
         return unit;
     }
 
-    public String getQues(){
+    public String getQues() {
         return ques;
     }
 
-    public String getA(){
+    public String getA() {
         return A;
     }
 
-    public String getB(){
+    public String getB() {
         return B;
     }
-    public String getC(){
+
+    public String getC() {
         return C;
     }
-    public String getD(){
+
+    public String getD() {
         return D;
     }
-    public String getCorrectChoice(){
+
+    public String getCorrectChoice() {
         return correctChoice;
     }
 }

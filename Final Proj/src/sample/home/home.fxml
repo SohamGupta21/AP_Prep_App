@@ -23,6 +23,7 @@
       <Hyperlink layoutX="67.0" layoutY="307.0" onAction="#goToAddClassmate" text="+ Add Classmate" />
       <Button layoutX="40.0" layoutY="25.0" mnemonicParsing="false" onAction="#goToLogin" text="Sign  Out" />
       <ListView fx:id="courseList" layoutX="19.0" layoutY="100.0" prefHeight="65.0" prefWidth="199.0" />
-      <ListView fx:id="classmateList" layoutX="20.0" layoutY="242.0" prefHeight="65.0" prefWidth="199.0" />
+      <ListView fx:id="classmateList" layoutX="20.0" layoutY="242.0" onMouseClicked="#goToClassmateSummary" prefHeight="65.0" prefWidth="199.0" />
+      <Button layoutX="232.0" layoutY="119.0" mnemonicParsing="false" onAction="#goToCourseSummary" text="Go" />
    </children>
 </AnchorPane>

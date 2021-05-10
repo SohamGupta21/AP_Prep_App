@@ -14,6 +14,7 @@ import sample.DatabaseManagers.UserManager;
 import sample.Objects.Course;
 import sample.Objects.User;
 import sample.classmate.AddClassmateController;
+import sample.course.CourseSummaryController;
 import sample.course.CreateCourseController;
 
 import java.io.IOException;
@@ -64,7 +65,7 @@ public class HomeController {
     public void loadClassmates(){
         String classmateString = user.getClassmates();
         ArrayList<Integer> classmates = new ArrayList<>();
-        while(classmateString.length() > 0){
+        while(classmateString != null && classmateString.length() > 0){
             classmates.add(Integer.parseInt(classmateString.substring(0, classmateString.indexOf("*"))));
             if(classmateString.indexOf("*") + 1 > classmateString.length() - 1){
                 break;
@@ -128,4 +129,28 @@ public class HomeController {
         window.setScene(scene);
         window.show();
     }
+
+    @FXML
+    private void goToCourseSummary(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/coursesummary.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        CourseSummaryController  courseSummaryController = loader.getController();
+        //get a course object from the course name
+        CourseManager courseManager = new CourseManager();
+        Course c = courseManager.getCourseByName(courseList.getSelectionModel().getSelectedItem().toString());
+        //send the user and course object to the course summary page
+        courseSummaryController.setData(user, c);
+        window.show();
+    }
+
+    @FXML
+    private void goToClassmateSummary(){
+
+    }
+
 }
