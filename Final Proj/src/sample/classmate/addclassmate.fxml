@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.classmate.AddClassmateController">
+   <children>
+      <TextField fx:id="nameField" layoutX="220.0" layoutY="85.0" onKeyTyped="#updateList" />
+      <ListView fx:id="namesList" layoutX="201.0" layoutY="151.0" prefHeight="200.0" prefWidth="200.0" />
+      <Hyperlink layoutX="24.0" layoutY="23.0" onAction="#goToHome" text="Home" />
+      <Button layoutX="273.0" layoutY="359.0" mnemonicParsing="false" onAction="#addClassmate" text="Add" />
+   </children>
+</AnchorPane>

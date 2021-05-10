@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.AskForGradingController">
+   <children>
+      <Text layoutX="87.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classmates:" />
+      <ListView layoutX="31.0" layoutY="119.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="392.0" layoutY="141.0" text="John:" />
+      <Button layoutX="380.0" layoutY="206.0" mnemonicParsing="false" text="Ask to grade" />
+      <Hyperlink layoutX="78.0" layoutY="329.0" onAction="#goToAddClassmate" text=" + Add Classmate" />
+   </children>
+</AnchorPane>

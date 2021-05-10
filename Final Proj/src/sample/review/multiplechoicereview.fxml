@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.MultipleChoiceReviewController">
+   <children>
+      <ListView layoutX="31.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" />
+      <Text layoutX="106.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions:" />
+      <Text layoutX="401.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt" />
+      <Label layoutX="359.0" layoutY="103.0" text="Which one is a recursive loop?" />
+      <Text layoutX="359.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your choice: A" />
+      <Text layoutX="362.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct Choice: B" />
+      <Text layoutX="347.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A)" />
+      <Text layoutX="347.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D)" />
+      <Text layoutX="347.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C)" />
+      <Text layoutX="347.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B)" />
+      <Text layoutX="398.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text layoutX="398.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text layoutX="398.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text layoutX="400.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.HTMLEditor?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.quiz.WrittenResponseController">
+   <children>
+      <Text layoutX="43.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt: What is the reformation?" />
+      <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="47.0" layoutY="87.0" prefHeight="200.0" prefWidth="506.0" />
+      <Label layoutX="471.0" layoutY="32.0" text="Time:  59:59" />
+   </children>
+</AnchorPane>
