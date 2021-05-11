@@ -67,8 +67,12 @@ public class AddClassmateController {
     @FXML
     private void addClassmate(){
         //get the id of the classmate that is trying to get added
-        int classmateId = Integer.parseInt(userManager.getUserData(namesList.getSelectionModel().getSelectedItem().toString())[0]);
+        int classmateId = Integer.parseInt(userManager.getUserInfo(namesList.getSelectionModel().getSelectedItem().toString())[0]);
         //add the id to the user's database row
         userManager.addClassmateToUser(user.getId(), classmateId);
+        nameField.clear();
+        System.out.println("classmate has been added");
     }
+
+
 }

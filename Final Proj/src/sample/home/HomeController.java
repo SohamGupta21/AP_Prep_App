@@ -14,6 +14,7 @@ import sample.DatabaseManagers.UserManager;
 import sample.Objects.Course;
 import sample.Objects.User;
 import sample.classmate.AddClassmateController;
+import sample.classmate.UserSummaryController;
 import sample.course.CourseSummaryController;
 import sample.course.CreateCourseController;
 
@@ -30,7 +31,7 @@ public class HomeController {
 
     public void setData(String userName){
         UserManager um = new UserManager();
-        String[] response = um.getUserData(userName);
+        String[] response = um.getUserInfo(userName);
         user = new User(Integer.parseInt(response[0]), response[1], response[2], response[3]);
         userNameLbl.setText(user.getName());
         loadCourses();
@@ -64,6 +65,7 @@ public class HomeController {
 
     public void loadClassmates(){
         String classmateString = user.getClassmates();
+        System.out.println("Classmate string: " + classmateString);
         ArrayList<Integer> classmates = new ArrayList<>();
         while(classmateString != null && classmateString.length() > 0){
             classmates.add(Integer.parseInt(classmateString.substring(0, classmateString.indexOf("*"))));
@@ -72,9 +74,9 @@ public class HomeController {
             }
             classmateString = classmateString.substring(classmateString.indexOf("*") + 1);
         }
-        CourseManager courseManager = new CourseManager();
+        UserManager userManager = new UserManager();
         for(int c : classmates){
-            classmateList.getItems().add(courseManager.getCourseName(c));
+            classmateList.getItems().add(userManager.getUserInfo(c).getName());
         }
     }
 
@@ -131,7 +133,7 @@ public class HomeController {
     }
 
     @FXML
-    private void goToCourseSummary(ActionEvent event) throws IOException{
+    private void goToCourseSummary(ActionEvent event) throws IOException, InterruptedException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/coursesummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -149,8 +151,25 @@ public class HomeController {
     }
 
     @FXML
-    private void goToClassmateSummary(){
+    private void goToClassmateSummary(ActionEvent event) throws IOException, InterruptedException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../classmate/usersummary.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        UserSummaryController userSummaryController = loader.getController();
+        //get a user object from the username
+        UserManager userManager = new UserManager();
+        int classmateId = Integer.parseInt(userManager.getUserInfo(classmateList.getSelectionModel().getSelectedItem().toString())[0]);
+        User classmate = userManager.getUserInfo(classmateId);
+        System.out.println("CLASSMARWE " + classmate);
+        //send the main user object and the user object that is being viewed to the user summary page
+        userSummaryController.setData(user, classmate);
+
+
+        window.show();
     }
 
 }

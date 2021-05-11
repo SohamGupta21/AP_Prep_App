@@ -15,6 +15,7 @@ import sample.Objects.User;
 import sample.home.HomeController;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class CourseSummaryController {
 
@@ -26,9 +27,10 @@ public class CourseSummaryController {
     @FXML
     Label dateString;
 
-    public void setData(User user, Course course){
+    public void setData(User user, Course course) throws InterruptedException {
         this.user = user;
         this.course = course;
+        TimeUnit.SECONDS.sleep(3);
         fillScreenData();
     }
 

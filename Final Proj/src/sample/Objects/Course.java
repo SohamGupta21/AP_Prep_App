@@ -1,7 +1,5 @@
 package sample.Objects;
 
-import com.sun.media.jfxmediaimpl.platform.gstreamer.GSTPlatform;
-import javafx.scene.control.PasswordField;
 import sample.DatabaseManagers.MCQManager;
 import sample.DatabaseManagers.UnitManager;
 import sample.DatabaseManagers.UserManager;
@@ -39,7 +37,7 @@ public class Course {
         }
         UserManager userManager = new UserManager();
         for(String m : splitString(members)){
-            this.members.add(userManager.getUserData(Integer.parseInt(m)));
+            this.members.add(userManager.getUserInfo(Integer.parseInt(m)));
         }
     }
 

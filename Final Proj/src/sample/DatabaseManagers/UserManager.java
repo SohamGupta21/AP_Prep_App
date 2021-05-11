@@ -163,7 +163,7 @@ public class UserManager {
         return 0;
     }
 
-    public String[] getUserData(String userName){
+    public String[] getUserInfo(String userName){
         String[] answer = new String[4];
         Connection conn = null;
         Statement stmt = null;
@@ -219,7 +219,7 @@ public class UserManager {
         return answer;
     }
 
-    public User getUserData(int userId){
+    public User getUserInfo(int userId){
         Connection conn = null;
         Statement stmt = null;
 
