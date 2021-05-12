@@ -55,10 +55,15 @@ public class UnitSummaryController {
         window.setScene(scene);
         //getting the MCQ
         MCQManager mcqManager = new MCQManager();
-        MCQ m = mcqManager.getMCQByPromptUnitCourse(toCompleteList.getSelectionModel().getSelectedItem().toString(), unit.getName(), course.getName());
+        ArrayList<MCQ> mcqsToSend = new ArrayList<>();
+        for(Object s : toCompleteList.getItems()){
+            MCQ m = mcqManager.getMCQByPromptUnitCourse(s.toString(), unit.getName(), course.getName());
+            mcqsToSend.add(m);
+        }
+        System.out.println("MCQS to send: " + mcqsToSend.size());
         //multiple choice controller to send the data
         MultipleChoiceController multipleChoiceController = loader.getController();
-        multipleChoiceController.setData(user, course, unit, m);
+        multipleChoiceController.setData(user, course, unit, mcqsToSend);
         window.show();
     }
 
@@ -93,4 +98,3 @@ public class UnitSummaryController {
     }
 
 }
-
