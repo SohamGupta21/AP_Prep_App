@@ -17,7 +17,8 @@
       <Button layoutX="14.0" layoutY="91.0" mnemonicParsing="false" onAction="#goToWrittenReview" prefHeight="130.0" prefWidth="141.0" text="15 Written Questions Completed" wrapText="true" />
       <Button layoutX="168.0" layoutY="91.0" mnemonicParsing="false" onAction="#goToMultipleChoiceReview" prefHeight="130.0" prefWidth="178.0" text="5 Multiple Choice tests Completed" wrapText="true" />
       <ListView fx:id="goalsList" layoutX="432.0" layoutY="198.0" prefHeight="99.0" prefWidth="141.0" />
-      <Text layoutX="257.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Summary" />
+      <Text fx:id="title" layoutX="257.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Summary" />
       <Hyperlink layoutX="14.0" layoutY="11.0" onAction="#goToHome" text="Home" />
+      <Button layoutX="187.0" layoutY="317.0" mnemonicParsing="false" onAction="#goToUnitSummary" text="Go" />
    </children>
 </AnchorPane>

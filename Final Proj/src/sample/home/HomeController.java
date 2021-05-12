@@ -49,7 +49,7 @@ public class HomeController {
         String courseString = user.getCourses();
         ArrayList<Integer> courses = new ArrayList<>();
         System.out.println(courseString);
-        while(courseString.length() > 0){
+        while(courseString != null && courseString.length() > 0){
             courses.add(Integer.parseInt(courseString.substring(0, courseString.indexOf("*"))));
             if(courseString.indexOf("*") + 1 > courseString.length() - 1){
                 break;

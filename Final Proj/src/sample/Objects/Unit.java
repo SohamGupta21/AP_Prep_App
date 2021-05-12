@@ -14,7 +14,16 @@ public class Unit {
         this.mcqs = m;
         this.written = w;
     }
+    public Unit(){}
     public String getName(){
         return name;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public String getMcqs(){
+        return mcqs;
     }
 }
