@@ -17,6 +17,7 @@ public class MultipleChoiceController {
         this.unit = unit;
         this.course = course;
         this.mcq = mcq;
+        System.out.println(mcq.getQues());
     }
 
 }

@@ -53,7 +53,12 @@ public class UnitSummaryController {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+        //getting the MCQ
+        MCQManager mcqManager = new MCQManager();
+        MCQ m = mcqManager.getMCQByPromptUnitCourse(toCompleteList.getSelectionModel().getSelectedItem().toString(), unit.getName(), course.getName());
+        //multiple choice controller to send the data
         MultipleChoiceController multipleChoiceController = loader.getController();
+        multipleChoiceController.setData(user, course, unit, m);
         window.show();
     }
 
