@@ -1,5 +1,6 @@
 package sample.DatabaseManagers;
 
+import sample.Objects.CompletedQuestion;
 import sample.Objects.Unit;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ public class QuestionsCompletedManager {
     private final String USER = "root";
     private final String PASS = "MySQL2021";
 
-    public void databaseRegistration(String time, int quesId, int userId, String answer){
+    public void databaseRegistration(CompletedQuestion completedQuestion){
 
         Connection conn = null;
         Statement stmt = null;
@@ -29,7 +30,7 @@ public class QuestionsCompletedManager {
             stmt = conn.createStatement();
             String sql;
             int rowInd = getRowsOfTable() + 1;
-            sql = "INSERT INTO QuestionsCompleted (idQuestionsCompleted, Time, QuestionID, UserID, Answer) " + "VALUES("+ rowInd + ",'"+ time + "','" + quesId + "','"+ userId + "','"+ answer+ "')";
+            sql = "INSERT INTO QuestionsCompleted (idQuestionsCompleted, Time, QuestionID, UserID, Answer, CorrectAnswer) " + "VALUES("+ rowInd + ",'" + 0 + "',"+ completedQuestion.getQuestionId() + ","+ completedQuestion.getUserId() + ",'"+ completedQuestion.getAnswer()+ "','" + completedQuestion.getCorrectAnswer() + "')";
             stmt.executeUpdate(sql);
 
             //STEP 6: Clean-up environment

@@ -1,15 +1,22 @@
 package sample.quiz;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import sample.DatabaseManagers.QuestionsCompletedManager;
-import sample.Objects.Course;
-import sample.Objects.MCQ;
-import sample.Objects.Unit;
-import sample.Objects.User;
+import sample.DatabaseManagers.UnitManager;
+import sample.Objects.*;
+import sample.course.UnitSummaryController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MultipleChoiceController {
@@ -18,7 +25,7 @@ public class MultipleChoiceController {
     private Course course;
     private Unit unit;
     private ArrayList<MCQ> unansweredMcqs = new ArrayList<>();
-    private ArrayList<MCQ> answeredMcqs = new ArrayList<>();
+    private ArrayList<CompletedQuestion> answeredMcqs = new ArrayList<>();
     private MCQ mcq;
 
     @FXML
@@ -53,18 +60,38 @@ public class MultipleChoiceController {
     }
 
     @FXML
-    private void submitData(){
+    private void submitData(ActionEvent event) throws IOException{
         MCQ temp = unansweredMcqs.remove(0);
         temp.setSelectedAnswer(answerSelectionList.getSelectionModel().getSelectedItem());
-        answeredMcqs.add(temp);
-       if(unansweredMcqs.size() >0){
+        CompletedQuestion c = new CompletedQuestion(temp.getID(), user.getId(), temp.getSelectedAnswer(), temp.getCorrectChoice());
+        answeredMcqs.add(c);
+        if(unansweredMcqs.size() >0){
            mcq = unansweredMcqs.get(0);
+           displayData();
        } else {
            //store all of the questions that they answered into the database
            //there really doesn't really have to be a grading system per se, just store the correct answer and what the user actually selected
            QuestionsCompletedManager questionsCompletedManager = new QuestionsCompletedManager();
+           for(CompletedQuestion completedQuestion : answeredMcqs){
+               //send the data to the database
+               questionsCompletedManager.databaseRegistration(completedQuestion);
+               goBackToUnitSummary(event);
+           }
        }
-       displayData();
+    }
+
+    private void goBackToUnitSummary(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        UnitSummaryController unitSummaryController = loader.getController();
+        //gets the unit object that we want
+        unitSummaryController.setData(user, course, unit);
+        window.show();
     }
 
 }

@@ -38,6 +38,10 @@ public class MCQ {
         this.selectedAnswer = sa;
     }
 
+    public String getSelectedAnswer(){
+        return selectedAnswer;
+    }
+
     public String getUnit() {
         return unit;
     }
