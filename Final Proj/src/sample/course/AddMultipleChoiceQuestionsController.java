@@ -70,6 +70,21 @@ public class AddMultipleChoiceQuestionsController {
     private void addQuestionsToCourse(){
         course.addMCQs(questions);
     }
+
+    @FXML
+    private void addQuestion(){
+        questions.add(new MCQ(course.getName(),unitsListView.getSelectionModel().getSelectedItem().toString(), prompt.getText(), choiceA.getText(), choiceB.getText(), choiceC.getText(), choiceD.getText(), correctChoicePicker.getText()));
+        clearFields();
+        //mcqManager.databaseRegistration(course.getName(), unitsListView.getSelectionModel().getSelectedItem().toString(), prompt.getText(), choiceA.getText(), choiceB.getText(), choiceC.getText(), choiceD.getText(), correctChoicePicker.getAccessibleText());
+    }
+    private void clearFields(){
+        prompt.clear();
+        choiceA.clear();
+        choiceB.clear();
+        choiceC.clear();
+        choiceD.clear();
+        correctChoicePicker.clear();
+    }
     @FXML
     private void goToWrittenQuestions(ActionEvent event) throws IOException{
 
@@ -89,19 +104,5 @@ public class AddMultipleChoiceQuestionsController {
         window.show();
 
         addWrittenQuestionsController.populateListView();
-    }
-    @FXML
-    private void addQuestion(){
-        questions.add(new MCQ(course.getName(),unitsListView.getSelectionModel().getSelectedItem().toString(), prompt.getText(), choiceA.getText(), choiceB.getText(), choiceC.getText(), choiceD.getText(), correctChoicePicker.getText()));
-        clearFields();
-        //mcqManager.databaseRegistration(course.getName(), unitsListView.getSelectionModel().getSelectedItem().toString(), prompt.getText(), choiceA.getText(), choiceB.getText(), choiceC.getText(), choiceD.getText(), correctChoicePicker.getAccessibleText());
-    }
-    private void clearFields(){
-        prompt.clear();
-        choiceA.clear();
-        choiceB.clear();
-        choiceC.clear();
-        choiceD.clear();
-        correctChoicePicker.clear();
     }
 }

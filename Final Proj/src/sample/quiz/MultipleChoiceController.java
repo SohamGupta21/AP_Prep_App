@@ -17,13 +17,14 @@ public class MultipleChoiceController {
     private User user;
     private Course course;
     private Unit unit;
-    private ArrayList<MCQ> mcqs = new ArrayList<>();
+    private ArrayList<MCQ> unansweredMcqs = new ArrayList<>();
+    private ArrayList<MCQ> answeredMcqs = new ArrayList<>();
     private MCQ mcq;
 
     @FXML
     Text promptText;
     @FXML
-    ListView answerSelectionList;
+    ListView<String> answerSelectionList;
     @FXML
     Label aLabel, bLabel, cLabel, dLabel;
 
@@ -31,7 +32,7 @@ public class MultipleChoiceController {
         this.user = user;
         this.unit = unit;
         this.course = course;
-        this.mcqs = mcqs;
+        this.unansweredMcqs = mcqs;
         this.mcq = mcqs.get(0);
         displayData();
     }
@@ -43,6 +44,7 @@ public class MultipleChoiceController {
         bLabel.setText("(B) " + mcq.getB());
         cLabel.setText("(C) " + mcq.getC());
         dLabel.setText("(D) " + mcq.getD());
+        answerSelectionList.getItems().clear();
         answerSelectionList.getItems().add("A");
         answerSelectionList.getItems().add("B");
         answerSelectionList.getItems().add("C");
@@ -52,8 +54,16 @@ public class MultipleChoiceController {
 
     @FXML
     private void submitData(){
-       mcqs.remove(0);
-       mcq = mcqs.get(0);
+        MCQ temp = unansweredMcqs.remove(0);
+        temp.setSelectedAnswer(answerSelectionList.getSelectionModel().getSelectedItem());
+        answeredMcqs.add(temp);
+       if(unansweredMcqs.size() >0){
+           mcq = unansweredMcqs.get(0);
+       } else {
+           //store all of the questions that they answered into the database
+           //there really doesn't really have to be a grading system per se, just store the correct answer and what the user actually selected
+           QuestionsCompletedManager questionsCompletedManager = new QuestionsCompletedManager();
+       }
        displayData();
     }
 

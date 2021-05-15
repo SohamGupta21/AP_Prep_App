@@ -9,6 +9,8 @@ public class MCQ {
     private final String C;
     private final String D;
     private final String correctChoice;
+    private int ID = 0;
+    private String selectedAnswer = "";
 
     public MCQ(String course, String unit, String ques, String A, String B, String C, String D, String correctChoice) {
         this.course = course;
@@ -19,6 +21,21 @@ public class MCQ {
         this.C = C;
         this.D = D;
         this.correctChoice = correctChoice;
+    }
+    public MCQ(String course, String unit, String ques, String A, String B, String C, String D, String correctChoice, int ID) {
+        this.course = course;
+        this.unit = unit;
+        this.ques = ques;
+        this.A = A;
+        this.B = B;
+        this.C = C;
+        this.D = D;
+        this.correctChoice = correctChoice;
+        this.ID = ID;
+    }
+
+    public void setSelectedAnswer(String sa){
+        this.selectedAnswer = sa;
     }
 
     public String getUnit() {
@@ -47,5 +64,9 @@ public class MCQ {
 
     public String getCorrectChoice() {
         return correctChoice;
+    }
+
+    public int getID(){
+        return ID;
     }
 }

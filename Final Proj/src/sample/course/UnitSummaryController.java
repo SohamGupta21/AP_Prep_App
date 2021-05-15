@@ -25,7 +25,7 @@ public class UnitSummaryController {
     @FXML
     Text title;
     @FXML
-    ListView toCompleteList, completedList;
+    ListView toCompleteList, completedList, toCompleteWritten, completedWritten;
     private User user;
     private Course course;
     private Unit unit;
@@ -56,15 +56,26 @@ public class UnitSummaryController {
         //getting the MCQ
         MCQManager mcqManager = new MCQManager();
         ArrayList<MCQ> mcqsToSend = new ArrayList<>();
+        System.out.println("Complete items: " + toCompleteList.getItems());
         for(Object s : toCompleteList.getItems()){
             MCQ m = mcqManager.getMCQByPromptUnitCourse(s.toString(), unit.getName(), course.getName());
             mcqsToSend.add(m);
         }
-        System.out.println("MCQS to send: " + mcqsToSend.size());
+        System.out.println("MCQS to send: " + mcqsToSend);
         //multiple choice controller to send the data
         MultipleChoiceController multipleChoiceController = loader.getController();
         multipleChoiceController.setData(user, course, unit, mcqsToSend);
         window.show();
+    }
+
+    @FXML
+    private void goToWritten(ActionEvent event) throws IOException{
+
+    }
+
+    @FXML
+    private void goToWrittenReview(ActionEvent event) throws IOException{
+
     }
 
     public void setData(User user, Course course, Unit unit) {
@@ -77,6 +88,7 @@ public class UnitSummaryController {
     private void displayData() {
         title.setText(unit.getName());
         String mcqs = unit.getMcqs();
+        System.out.println("The unit mcqs are: " + unit.getMcqs());
         ArrayList<String> splitMCQS = splitString(mcqs);
         MCQManager mcqManager = new MCQManager();
         for (String m : splitMCQS) {

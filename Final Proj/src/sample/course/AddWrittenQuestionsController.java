@@ -86,7 +86,15 @@ public class AddWrittenQuestionsController {
         String unitString = "";
         for(Unit u : course.getUnits()){
             unitString = unitString + (unitManager.getRowsOfTable() + 1) + "*";
-            unitManager.databaseRegistration(u.getName(), writtenString, mcqString);
+            String multipleChoiceQuestions = "";
+            for(MCQ m : mcqManager.getMCQsByUnitCourse(u.getName(), course.getName())){
+                multipleChoiceQuestions += m.getID() + "*";
+            }
+            String writtenQuestions = "";
+            for(WrittenQuestion w : writtenManager.getWrittenByUnitCourse(u.getName(), course.getName())){
+                writtenQuestions += w.getID() + "*";
+            }
+            unitManager.databaseRegistration(u.getName(), writtenQuestions, multipleChoiceQuestions);
         }
         //create the course and add it to the database with a reference to the units
         int courseId = courseManager.getRowsOfTable() + 1;
