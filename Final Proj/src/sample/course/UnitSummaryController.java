@@ -9,13 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import sample.DatabaseManagers.MCQManager;
-import sample.DatabaseManagers.UnitManager;
-import sample.Objects.Course;
-import sample.Objects.MCQ;
-import sample.Objects.Unit;
-import sample.Objects.User;
+import sample.DatabaseManagers.*;
+import sample.Objects.*;
 import sample.quiz.MultipleChoiceController;
+import sample.quiz.WrittenResponseController;
+import sample.review.MultipleChoiceReviewController;
+import sample.review.WrittenReviewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +28,8 @@ public class UnitSummaryController {
     private User user;
     private Course course;
     private Unit unit;
+    private ArrayList<CompletedQuestion> answeredQuestions = new ArrayList<>();
+    private ArrayList<CompletedWrittenQuestion> answeredWritten = new ArrayList<>();
 
     @FXML
     private void goToCourseSummary(ActionEvent event) throws IOException {
@@ -69,13 +70,48 @@ public class UnitSummaryController {
     }
 
     @FXML
-    private void goToWritten(ActionEvent event) throws IOException{
+    private void goToMCQReview(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/multiplechoicereview.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        MultipleChoiceReviewController multipleChoiceReviewController = loader.getController();
+        //need to pass on an array of completed questions to the controller so that it can cycle through it and the user can check
+        multipleChoiceReviewController.setData(answeredQuestions, user, course, unit);
+        window.show();
+    }
+
+    @FXML
+    private void goToWritten(ActionEvent event) throws IOException{
+        //what is unique about written questions is that you only really do one at a time, unlike multiple choice questions where you do all at once
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../quiz/writtenresponse.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        WrittenResponseController writtenResponseController = loader.getController();
+        writtenResponseController.setData(user, course, unit, toCompleteWritten.getSelectionModel().getSelectedItem().toString());
+
+        window.show();
     }
 
     @FXML
     private void goToWrittenReview(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/writtenreview.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        WrittenReviewController writtenReviewController = loader.getController();
+
+        window.show();
     }
 
     public void setData(User user, Course course, Unit unit) {
@@ -87,14 +123,53 @@ public class UnitSummaryController {
 
     private void displayData() {
         title.setText(unit.getName());
+        //display the mcqs
         String mcqs = unit.getMcqs();
         System.out.println("The unit mcqs are: " + unit.getMcqs());
+        //get the answered questions by unit and course
+        QuestionsCompletedManager questionsCompletedManager = new QuestionsCompletedManager();
         ArrayList<String> splitMCQS = splitString(mcqs);
         MCQManager mcqManager = new MCQManager();
         for (String m : splitMCQS) {
             MCQ temp = mcqManager.getMCQByID(Integer.parseInt(m));
-            toCompleteList.getItems().add(temp.getQues());
+            ArrayList<CompletedQuestion> cqs = questionsCompletedManager.getByQuesId(Integer.parseInt(m));
+            boolean flag = false;
+            for(CompletedQuestion c : cqs){
+                if(c.getUserId() == user.getId()){
+                    completedList.getItems().add(temp.getQues());
+                    answeredQuestions.add(c);
+                    flag = true;
+                }
+            }
+            if(!flag){
+                toCompleteList.getItems().add(temp.getQues());
+            }
         }
+
+        //display the written questions
+        String writtenQues = unit.getWritten();
+        ArrayList<String> splitWritten = splitString(writtenQues);
+        WrittenManager writtenManager = new WrittenManager();
+        WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
+        for(String w : splitWritten){
+            WrittenQuestion temp = writtenManager.getWrittenById(Integer.parseInt(w));
+            System.out.println(temp);
+            ArrayList<CompletedWrittenQuestion> cwqs = writtenCompletedManager.getByQuesId(Integer.parseInt(w));
+            System.out.println("CWQS: " + cwqs);
+            boolean wflag = false;
+            for(CompletedWrittenQuestion cwq : cwqs){
+                if(cwq.getUserId() == user.getId()){
+                    System.out.println("Should be adding");
+                    completedWritten.getItems().add(temp.getPrompt());
+                    answeredWritten.add(cwq);
+                    wflag = true;
+                }
+            }
+            if(!wflag){
+                toCompleteWritten.getItems().add(temp.getPrompt());
+            }
+        }
+
     }
 
     private ArrayList<String> splitString(String s) {

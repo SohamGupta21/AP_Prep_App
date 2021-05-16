@@ -1,19 +1,18 @@
 package sample.DatabaseManagers;
 
 import sample.Objects.CompletedQuestion;
-import sample.Objects.MCQ;
-import sample.Objects.Unit;
+import sample.Objects.CompletedWrittenQuestion;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class QuestionsCompletedManager {
+public class WrittenCompletedManager {
     private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
 
-    public void databaseRegistration(CompletedQuestion completedQuestion){
+    public void databaseRegistration(CompletedWrittenQuestion completedWrittenQuestion){
 
         Connection conn = null;
         Statement stmt = null;
@@ -31,7 +30,7 @@ public class QuestionsCompletedManager {
             stmt = conn.createStatement();
             String sql;
             int rowInd = getRowsOfTable() + 1;
-            sql = "INSERT INTO QuestionsCompleted (idQuestionsCompleted, Time, QuestionID, UserID, Answer, CorrectAnswer) " + "VALUES("+ rowInd + ",'" + 0 + "',"+ completedQuestion.getQuestionId() + ","+ completedQuestion.getUserId() + ",'"+ completedQuestion.getAnswer()+ "','" + completedQuestion.getCorrectAnswer() + "')";
+            sql = "INSERT INTO WrittenCompleted (idWrittenCompleted, Prompt, WrittenID, UserID, UserAnswer) " + "VALUES("+ rowInd + ",'"+ completedWrittenQuestion.getPrompt() + "',"+ completedWrittenQuestion.getWrittenId() + ","+ completedWrittenQuestion.getUserId()+ ",'" + completedWrittenQuestion.getUserAnswer() + "')";
             stmt.executeUpdate(sql);
 
             //STEP 6: Clean-up environment
@@ -75,7 +74,7 @@ public class QuestionsCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT COUNT(*) FROM QuestionsCompleted";
+            sql = "SELECT COUNT(*) FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
@@ -107,8 +106,8 @@ public class QuestionsCompletedManager {
         return 0;
     }
 
-    public ArrayList<CompletedQuestion> getByQuesId(int id){
-        ArrayList<CompletedQuestion> answer = new ArrayList<>();
+    public ArrayList<CompletedWrittenQuestion> getByQuesId(int id){
+        ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
 
@@ -124,12 +123,12 @@ public class QuestionsCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT idQuestionsCompleted,Time, QuestionID, UserID, Answer, CorrectAnswer FROM QuestionsCompleted";
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId, UserAnswer FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
-                if(rs.getInt("idQuestionsCompleted") == id){
-                    CompletedQuestion temp = new CompletedQuestion(rs.getInt("QuestionID"), rs.getInt("UserID"),rs.getString("Answer"), rs.getString("CorrectAnswer"));
+                if(rs.getInt("WrittenId") == id){
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"));
                     answer.add(temp);
                 }
             }
@@ -158,5 +157,4 @@ public class QuestionsCompletedManager {
         }
         return answer;
     }
-
 }

@@ -26,4 +26,5 @@ public class Unit {
     public String getMcqs(){
         return mcqs;
     }
+    public String getWritten(){return written;}
 }
