@@ -13,6 +13,7 @@ import sample.DatabaseManagers.*;
 import sample.Objects.*;
 import sample.quiz.MultipleChoiceController;
 import sample.quiz.WrittenResponseController;
+import sample.review.AskForGradingController;
 import sample.review.GradeController;
 import sample.review.MultipleChoiceReviewController;
 import sample.review.WrittenReviewController;
@@ -143,8 +144,9 @@ public class UnitSummaryController {
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
-        WrittenResponseController writtenResponseController = loader.getController();
-        writtenResponseController.setData(user, course, unit, writtenToComplete.getSelectionModel().getSelectedItem().toString());
+
+        AskForGradingController askForGradingController = loader.getController();
+        askForGradingController.setData(user, course, unit, writtenToRequest.getSelectionModel().getSelectedItem().toString());
 
         window.show();
     }
