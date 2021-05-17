@@ -13,6 +13,7 @@ import sample.DatabaseManagers.*;
 import sample.Objects.*;
 import sample.quiz.MultipleChoiceController;
 import sample.quiz.WrittenResponseController;
+import sample.review.GradeController;
 import sample.review.MultipleChoiceReviewController;
 import sample.review.WrittenReviewController;
 
@@ -24,12 +25,13 @@ public class UnitSummaryController {
     @FXML
     Text title;
     @FXML
-    ListView toCompleteList, completedList, toCompleteWritten, completedWritten;
+    ListView toCompleteList, completedList, writtenToComplete, writtenToReview,writtenToGrade, writtenToRequest;
     private User user;
     private Course course;
     private Unit unit;
     private ArrayList<CompletedQuestion> answeredQuestions = new ArrayList<>();
     private ArrayList<CompletedWrittenQuestion> answeredWritten = new ArrayList<>();
+    private ArrayList<CompletedWrittenQuestion> toGradeWritten = new ArrayList<>();
 
     @FXML
     private void goToCourseSummary(ActionEvent event) throws IOException {
@@ -95,7 +97,7 @@ public class UnitSummaryController {
 
         window.setScene(scene);
         WrittenResponseController writtenResponseController = loader.getController();
-        writtenResponseController.setData(user, course, unit, toCompleteWritten.getSelectionModel().getSelectedItem().toString());
+        writtenResponseController.setData(user, course, unit, writtenToComplete.getSelectionModel().getSelectedItem().toString());
 
         window.show();
     }
@@ -114,6 +116,39 @@ public class UnitSummaryController {
         window.show();
     }
 
+    @FXML
+    private void goToGrade(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/grade.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+
+        GradeController gradeController = loader.getController();
+        WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
+        //get the question by the name
+        gradeController.setData(user, course, unit, toGradeWritten.get(writtenToGrade.getSelectionModel().getSelectedIndex()));
+
+        window.show();
+    }
+
+    @FXML
+    private void goToRequest(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/askforgrading.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        WrittenResponseController writtenResponseController = loader.getController();
+        writtenResponseController.setData(user, course, unit, writtenToComplete.getSelectionModel().getSelectedItem().toString());
+
+        window.show();
+    }
+
     public void setData(User user, Course course, Unit unit) {
         this.user = user;
         this.course = course;
@@ -123,6 +158,11 @@ public class UnitSummaryController {
 
     private void displayData() {
         title.setText(unit.getName());
+        displayMultipleChoice();
+        displayWritten();
+    }
+
+    private void displayMultipleChoice(){
         //display the mcqs
         String mcqs = unit.getMcqs();
         System.out.println("The unit mcqs are: " + unit.getMcqs());
@@ -145,31 +185,53 @@ public class UnitSummaryController {
                 toCompleteList.getItems().add(temp.getQues());
             }
         }
+    }
 
+    private void displayWritten(){
         //display the written questions
+        //gets the ids of the written questions
         String writtenQues = unit.getWritten();
         ArrayList<String> splitWritten = splitString(writtenQues);
         WrittenManager writtenManager = new WrittenManager();
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
+        //loops through each id
         for(String w : splitWritten){
+            //creates a written question object from the id
             WrittenQuestion temp = writtenManager.getWrittenById(Integer.parseInt(w));
-            System.out.println(temp);
+            //constructs and arraylist of all of the completed written questions that match this question id
             ArrayList<CompletedWrittenQuestion> cwqs = writtenCompletedManager.getByQuesId(Integer.parseInt(w));
-            System.out.println("CWQS: " + cwqs);
             boolean wflag = false;
+            //for every written question in here
             for(CompletedWrittenQuestion cwq : cwqs){
+                // if it is the question that this user answered
                 if(cwq.getUserId() == user.getId()){
-                    System.out.println("Should be adding");
-                    completedWritten.getItems().add(temp.getPrompt());
-                    answeredWritten.add(cwq);
-                    wflag = true;
+                    if(cwq.getGraderId() >= 1 && cwq.getGraderComments() != null){
+                        //should be to review
+                        wflag = true;
+                        answeredWritten.add(cwq);
+                        writtenToReview.getItems().add(temp.getPrompt());
+                    }
+                    if(cwq.getGraderId() < 1){
+                        //should be to request
+                        wflag = true;
+                        answeredWritten.add(cwq);
+                        writtenToRequest.getItems().add(temp.getPrompt());
+                    }
+                }
+                if(cwq.getGraderId() == user.getId()){
+                    if(cwq.getGraderComments() == null){
+                        //should be to grade
+                        wflag = true;
+                        toGradeWritten.add(cwq);
+                        writtenToGrade.getItems().add(temp.getPrompt());
+                    }
                 }
             }
             if(!wflag){
-                toCompleteWritten.getItems().add(temp.getPrompt());
+                //should be to complete
+                writtenToComplete.getItems().add(temp.getPrompt());
             }
         }
-
     }
 
     private ArrayList<String> splitString(String s) {

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.web.HTMLEditor?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.WrittenReviewController">
    <children>
-      <Text layoutX="91.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My essay:" />
-      <Text layoutX="386.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commebts by User11256" />
-      <TextArea layoutX="356.0" layoutY="106.0" prefHeight="200.0" prefWidth="200.0" text="Great essay!" />
-      <HTMLEditor htmlText="EssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssayEssay" layoutX="33.0" layoutY="86.0" prefHeight="304.0" prefWidth="291.0" />
+      <Text layoutX="91.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My response: " />
+      <Text layoutX="386.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" />
+      <TextArea fx:id="comments" layoutX="356.0" layoutY="106.0" prefHeight="200.0" prefWidth="200.0" text="Great essay!" />
+      <TextArea fx:id="userResponseText" layoutX="36.0" layoutY="91.0" prefHeight="269.0" prefWidth="257.0" />
+      <Hyperlink layoutX="29.0" layoutY="14.0" onAction="#goToUnitSummary" text="Back" />
    </children>
 </AnchorPane>

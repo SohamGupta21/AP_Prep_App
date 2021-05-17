@@ -123,12 +123,12 @@ public class WrittenCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId, UserAnswer FROM WrittenCompleted";
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
                 if(rs.getInt("WrittenId") == id){
-                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"));
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"));
                     answer.add(temp);
                 }
             }
@@ -157,4 +157,50 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
+
+    public void setGraderComments(int userId, int writtenId, int graderId, String comments){
+
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            int rowInd = getRowsOfTable() + 1;
+            sql = "UPDATE WrittenCompleted" + "SET GraderComments=" + "'" + comments + "'" + "WHERE UserId=" + userId + ", WrittenId=" + writtenId + ", GraderId=" + graderId;
+            stmt.executeUpdate(sql);
+
+            //STEP 6: Clean-up environment
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+    }
+
 }
