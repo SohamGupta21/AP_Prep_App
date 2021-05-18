@@ -17,6 +17,7 @@ import sample.Objects.Course;
 import sample.Objects.Unit;
 import sample.Objects.User;
 import sample.course.UnitSummaryController;
+import sample.home.HomeController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,31 +30,30 @@ public class GradeController {
     Text prompt, responseTitle;
 
     private User user;
-    private Course course;
-    private Unit unit;
     private CompletedWrittenQuestion completedWritten;
 
-    public void setData(User user, Course course, Unit unit,CompletedWrittenQuestion completedWritten){
+    public void setData(User user, CompletedWrittenQuestion completedWritten){
         this.user = user;
-        this.course = course;
-        this.unit = unit;
         this.completedWritten = completedWritten;
         displayData();
     }
+    //change this to go home
     @FXML
-    private void goToUnitSummary(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
+    private void goHome(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
-        UnitSummaryController unitSummaryController = loader.getController();
-        //gets the unit object that we want
-        unitSummaryController.setData(user, course, unit);
+
+        HomeController homeController = loader.getController();
+        homeController.setData(user);
+
         window.show();
     }
+
     @FXML
     private void done(ActionEvent event) throws IOException{
         //this should add the comments to the completed question
@@ -68,7 +68,7 @@ public class GradeController {
                 }
             }
         }
-        goToUnitSummary(event);
+        goHome(event);
     }
 
     private void displayData(){

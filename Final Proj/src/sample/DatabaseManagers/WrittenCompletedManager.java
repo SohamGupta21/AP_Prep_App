@@ -157,6 +157,57 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
+    public ArrayList<CompletedWrittenQuestion> getByGraderId(int id){
+        ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
+            ResultSet rs = stmt.executeQuery(sql);
+            //STEP 5: Extract data from result set
+            while(rs.next()){
+                if(rs.getInt("GraderId") == id){
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"));
+                    answer.add(temp);
+                }
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+        return answer;
+    }
 
     public ArrayList<CompletedWrittenQuestion> getByQuesName(String name){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
@@ -227,8 +278,8 @@ public class WrittenCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            int rowInd = getRowsOfTable() + 1;
-            sql = "UPDATE WrittenCompleted" + "SET GraderComments=" + "'" + comments + "'" + "WHERE UserId=" + userId + ", WrittenId=" + writtenId + ", GraderId=" + graderId;
+            int rowInd = getIdByUserWrittenGrader(userId, writtenId, graderId);
+            sql = "UPDATE WrittenCompleted " + "SET GraderComments = '" + comments + "' WHERE idWrittenCompleted = " + rowInd;
             stmt.executeUpdate(sql);
 
             //STEP 6: Clean-up environment
@@ -305,6 +356,55 @@ public class WrittenCompletedManager {
         return 0;
     }
 
+    public int getIdByUserWrittenGrader(int userId, int writtenId, int graderId){
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
+            ResultSet rs = stmt.executeQuery(sql);
+            //STEP 5: Extract data from result set
+            while(rs.next()){
+                if(rs.getInt("UserId") == userId && rs.getInt("WrittenId") == writtenId && rs.getInt("GraderId") == graderId){
+                    return rs.getInt("idWrittenCompleted");
+                }
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+        return 0;
+    }
 
     public void setGraderId(int userId, int writtenId, int graderId){
 

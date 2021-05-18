@@ -6,13 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.GradeController">
    <children>
       <TextArea fx:id="response" layoutX="50.0" layoutY="100.0" prefHeight="277.0" prefWidth="239.0" />
       <TextArea fx:id="comments" layoutX="358.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="done" layoutX="446.0" layoutY="337.0" mnemonicParsing="false" onAction="#done" text="Done" />
-      <Hyperlink fx:id="back" layoutX="50.0" layoutY="33.0" onAction="#goToUnitSummary" text="Back" />
+      <Hyperlink fx:id="back" layoutX="50.0" layoutY="33.0" onAction="#goHome" text="Back" />
       <Text fx:id="prompt" layoutX="285.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt" />
       <Text fx:id="responseTitle" layoutX="106.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's response" />
       <Text layoutX="431.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My comments" />

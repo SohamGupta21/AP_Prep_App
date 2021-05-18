@@ -11,12 +11,15 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import sample.DatabaseManagers.CourseManager;
 import sample.DatabaseManagers.UserManager;
+import sample.DatabaseManagers.WrittenCompletedManager;
+import sample.Objects.CompletedWrittenQuestion;
 import sample.Objects.Course;
 import sample.Objects.User;
 import sample.classmate.AddClassmateController;
 import sample.classmate.UserSummaryController;
 import sample.course.CourseSummaryController;
 import sample.course.CreateCourseController;
+import sample.review.GradeController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,9 +28,10 @@ public class HomeController {
     @FXML
     Label userNameLbl;
     @FXML
-    ListView courseList, classmateList;
+    ListView courseList, classmateList,toGrade;
 
     private User user;
+    private ArrayList<CompletedWrittenQuestion> completedWrittenQuestions = new ArrayList<>();
 
     public void setData(String userName){
         UserManager um = new UserManager();
@@ -36,6 +40,7 @@ public class HomeController {
         userNameLbl.setText(user.getName());
         loadCourses();
         loadClassmates();
+        loadGrade();
     }
 
     public void setData(User user){
@@ -43,6 +48,7 @@ public class HomeController {
         userNameLbl.setText(user.getName());
         loadCourses();
         loadClassmates();
+        loadGrade();
     }
 
     public void loadCourses(){
@@ -133,7 +139,7 @@ public class HomeController {
     }
 
     @FXML
-    private void goToCourseSummary(ActionEvent event) throws IOException, InterruptedException {
+    private void goToCourseSummary(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/coursesummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -167,6 +173,33 @@ public class HomeController {
         System.out.println("CLASSMARWE " + classmate);
         //send the main user object and the user object that is being viewed to the user summary page
         userSummaryController.setData(user, classmate);
+
+
+        window.show();
+    }
+
+    private void loadGrade(){
+        System.out.println("Loading grade");
+        WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
+        completedWrittenQuestions = writtenCompletedManager.getByGraderId(user.getId());
+        System.out.println("By grader: " + completedWrittenQuestions);
+        for(CompletedWrittenQuestion c : completedWrittenQuestions){
+            toGrade.getItems().add(c.getPrompt());
+        }
+    }
+
+    @FXML
+    private void goToGrade(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/grade.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        GradeController gradeController = loader.getController();
+        gradeController.setData(user, completedWrittenQuestions.get(toGrade.getSelectionModel().getSelectedIndex()));
+        //send the main user object and the user object that is being viewed to the user summary page
 
 
         window.show();

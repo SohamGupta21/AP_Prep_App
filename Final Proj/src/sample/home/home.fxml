@@ -26,5 +26,8 @@
       <ListView fx:id="classmateList" layoutX="20.0" layoutY="242.0" prefHeight="65.0" prefWidth="199.0" />
       <Button layoutX="232.0" layoutY="119.0" mnemonicParsing="false" onAction="#goToCourseSummary" text="Go" />
       <Button layoutX="232.0" layoutY="261.0" mnemonicParsing="false" onAction="#goToClassmateSummary" text="Go" />
+      <Text layoutX="407.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To  Grade:" />
+      <ListView fx:id="toGrade" layoutX="346.0" layoutY="280.0" prefHeight="97.0" prefWidth="184.0" />
+      <Button layoutX="531.0" layoutY="315.0" mnemonicParsing="false" onAction="#goToGrade" text="Grade" />
    </children>
 </AnchorPane>

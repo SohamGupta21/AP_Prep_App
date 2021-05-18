@@ -26,7 +26,7 @@ public class UnitSummaryController {
     @FXML
     Text title;
     @FXML
-    ListView toCompleteList, completedList, writtenToComplete, writtenToReview,writtenToGrade, writtenToRequest;
+    ListView toCompleteList, completedList, writtenToComplete, writtenToReview, writtenToRequest;
     private User user;
     private Course course;
     private Unit unit;
@@ -118,24 +118,6 @@ public class UnitSummaryController {
     }
 
     @FXML
-    private void goToGrade(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/grade.fxml"));
-        Parent parent = loader.load();
-        Scene scene = new Scene(parent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-
-        GradeController gradeController = loader.getController();
-        WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
-        //get the question by the name
-        gradeController.setData(user, course, unit, toGradeWritten.get(writtenToGrade.getSelectionModel().getSelectedIndex()));
-
-        window.show();
-    }
-
-    @FXML
     private void goToRequest(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/askforgrading.fxml"));
         Parent parent = loader.load();
@@ -218,14 +200,6 @@ public class UnitSummaryController {
                         wflag = true;
                         answeredWritten.add(cwq);
                         writtenToRequest.getItems().add(temp.getPrompt());
-                    }
-                }
-                if(cwq.getGraderId() == user.getId()){
-                    if(cwq.getGraderComments() == null){
-                        //should be to grade
-                        wflag = true;
-                        toGradeWritten.add(cwq);
-                        writtenToGrade.getItems().add(temp.getPrompt());
                     }
                 }
             }
