@@ -22,7 +22,9 @@ import sample.course.CreateCourseController;
 import sample.review.GradeController;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class HomeController {
     @FXML
@@ -33,7 +35,7 @@ public class HomeController {
     private User user;
     private ArrayList<CompletedWrittenQuestion> completedWrittenQuestionsList = new ArrayList<>();
 
-    public void setData(String userName){
+    public void setData(String userName) {
         UserManager um = new UserManager();
         String[] response = um.getUserInfo(userName);
         user = new User(Integer.parseInt(response[0]), response[1], response[2], response[3]);
@@ -43,7 +45,7 @@ public class HomeController {
         loadGrade();
     }
 
-    public void setData(User user){
+    public void setData(User user) {
         this.user = user;
         userNameLbl.setText(user.getName());
         loadCourses();
@@ -74,6 +76,7 @@ public class HomeController {
         System.out.println("Classmate string: " + classmateString);
         ArrayList<Integer> classmates = new ArrayList<>();
         while(classmateString != null && classmateString.length() > 0){
+            System.out.println("THE STRING IS: " + classmateString);
             classmates.add(Integer.parseInt(classmateString.substring(0, classmateString.indexOf("*"))));
             if(classmateString.indexOf("*") + 1 > classmateString.length() - 1){
                 break;

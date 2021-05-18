@@ -72,6 +72,8 @@ public class AddClassmateController {
         userManager.addClassmateToUser(user.getId(), classmateId);
         nameField.clear();
         System.out.println("classmate has been added");
+        System.out.println(classmateId);
+        user.addClassmate(classmateId);
     }
 
 

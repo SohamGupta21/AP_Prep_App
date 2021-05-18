@@ -128,7 +128,7 @@ public class QuestionsCompletedManager {
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
-                if(rs.getInt("idQuestionsCompleted") == id){
+                if(rs.getInt("QuestionID") == id){
                     CompletedQuestion temp = new CompletedQuestion(rs.getInt("QuestionID"), rs.getInt("UserID"),rs.getString("Answer"), rs.getString("CorrectAnswer"));
                     answer.add(temp);
                 }

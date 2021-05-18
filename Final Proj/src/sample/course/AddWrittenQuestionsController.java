@@ -101,6 +101,7 @@ public class AddWrittenQuestionsController {
         courseManager.databaseRegistration(course.getName(), course.getTestDate(), user.getName(), "", mcqString, writtenString, unitString);
         //make sure that the user has a reference to the course
         userManager.addCourseToUser(user.getId(), courseId);
+        user.addCourse(courseId);
     }
 
     private void takeHome(ActionEvent event) throws IOException{

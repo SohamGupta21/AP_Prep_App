@@ -165,6 +165,7 @@ public class UnitSummaryController {
         for (String m : splitMCQS) {
             MCQ temp = mcqManager.getMCQByID(Integer.parseInt(m));
             ArrayList<CompletedQuestion> cqs = questionsCompletedManager.getByQuesId(Integer.parseInt(m));
+            System.out.println("The cqs are : " + cqs);
             boolean flag = false;
             for(CompletedQuestion c : cqs){
                 if(c.getUserId() == user.getId()){

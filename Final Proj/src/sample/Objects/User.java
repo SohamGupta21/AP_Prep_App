@@ -21,6 +21,16 @@ public class User {
         return id;
     }
 
+    public void addCourse(int id){
+        if(courses == null) courses = "";
+        courses += id + "*";
+    }
+
+    public void addClassmate(int id){
+        if(classmates == null) classmates = "";
+        classmates += id + "*";
+    }
+
     public String getCourses(){
         return courses;
     }
