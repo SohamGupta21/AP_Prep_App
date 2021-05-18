@@ -31,7 +31,7 @@ public class HomeController {
     ListView courseList, classmateList,toGrade;
 
     private User user;
-    private ArrayList<CompletedWrittenQuestion> completedWrittenQuestions = new ArrayList<>();
+    private ArrayList<CompletedWrittenQuestion> completedWrittenQuestionsList = new ArrayList<>();
 
     public void setData(String userName){
         UserManager um = new UserManager();
@@ -181,10 +181,13 @@ public class HomeController {
     private void loadGrade(){
         System.out.println("Loading grade");
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
-        completedWrittenQuestions = writtenCompletedManager.getByGraderId(user.getId());
+        ArrayList<CompletedWrittenQuestion> completedWrittenQuestions = writtenCompletedManager.getByGraderId(user.getId());
         System.out.println("By grader: " + completedWrittenQuestions);
         for(CompletedWrittenQuestion c : completedWrittenQuestions){
-            toGrade.getItems().add(c.getPrompt());
+            if(c.getGraderComments() == null){
+                toGrade.getItems().add(c.getPrompt());
+                completedWrittenQuestionsList.add(c);
+            }
         }
     }
 
@@ -198,7 +201,7 @@ public class HomeController {
 
         window.setScene(scene);
         GradeController gradeController = loader.getController();
-        gradeController.setData(user, completedWrittenQuestions.get(toGrade.getSelectionModel().getSelectedIndex()));
+        gradeController.setData(user, completedWrittenQuestionsList.get(toGrade.getSelectionModel().getSelectedIndex()));
         //send the main user object and the user object that is being viewed to the user summary page
 
 

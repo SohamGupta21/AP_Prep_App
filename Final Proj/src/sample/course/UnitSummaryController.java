@@ -113,7 +113,15 @@ public class UnitSummaryController {
 
         window.setScene(scene);
         WrittenReviewController writtenReviewController = loader.getController();
-
+        WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
+        ArrayList<CompletedWrittenQuestion> completedWrittenQuestions = writtenCompletedManager.getByQuesName(writtenToReview.getSelectionModel().getSelectedItem().toString());
+        CompletedWrittenQuestion actualQues = null;
+        for(CompletedWrittenQuestion c : completedWrittenQuestions){
+            if(c.getUserId() == user.getId()){
+                actualQues = c;
+            }
+        }
+        writtenReviewController.setData(user, course, unit, actualQues);
         window.show();
     }
 

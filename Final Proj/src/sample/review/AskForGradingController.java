@@ -65,7 +65,7 @@ public class AskForGradingController {
 
 
     @FXML
-    private void askToGrade(){
+    private void askToGrade(ActionEvent event) throws IOException{
         //identify the database reference that the string written question is referring to
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
         ArrayList<CompletedWrittenQuestion> possibleQuestions = writtenCompletedManager.getByQuesName(completedQuestion);
@@ -75,7 +75,7 @@ public class AskForGradingController {
                 writtenCompletedManager.setGraderId(user.getId(), c.getWrittenId(), classmatesList.get(classmates.getSelectionModel().getSelectedIndex()).getId());
             }
         }
-
+        goToUnitSummary(event);
     }
 
     @FXML

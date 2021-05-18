@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import sample.Objects.CompletedWrittenQuestion;
 import sample.Objects.Course;
@@ -32,6 +33,12 @@ public class WrittenReviewController {
         this.unit = unit;
         //this completed question has to have the grader id and comments in thr object
         this.completedWrittenQuestion = completedWrittenQuestion;
+        displayData();
+    }
+
+    public void displayData(){
+        userResponseText.setText(completedWrittenQuestion.getUserAnswer());
+        comments.setText(completedWrittenQuestion.getGraderComments());
     }
 
     @FXML

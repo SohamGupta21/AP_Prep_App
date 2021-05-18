@@ -24,11 +24,8 @@
       <Button layoutX="317.0" layoutY="187.0" mnemonicParsing="false" onAction="#goToWritten" text="Answer" />
       <Button layoutX="480.0" layoutY="187.0" mnemonicParsing="false" onAction="#goToWrittenReview" text="Review" />
       <Line endX="-99.0" endY="98.0" layoutX="366.0" layoutY="283.0" startX="-99.0" startY="-224.0" />
-      <ListView fx:id="writtenToGrade" layoutX="294.0" layoutY="248.0" prefHeight="100.0" prefWidth="106.0" />
-      <ListView fx:id="writtenToRequest" layoutX="452.0" layoutY="248.0" prefHeight="100.0" prefWidth="106.0" />
-      <Text layoutX="300.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Written To Grade" />
-      <Text layoutX="429.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Written To Request Grading" />
-      <Button layoutX="321.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToGrade" text="Grade" />
-      <Button layoutX="473.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToRequest" text="Request" />
+      <ListView fx:id="writtenToRequest" layoutX="283.0" layoutY="252.0" prefHeight="91.0" prefWidth="275.0" />
+      <Text layoutX="345.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Written To Request Grading" />
+      <Button layoutX="389.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToRequest" text="Request" />
    </children>
 </AnchorPane>
