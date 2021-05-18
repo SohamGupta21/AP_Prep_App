@@ -80,6 +80,7 @@ public class MultipleChoiceController {
        }
     }
 
+    @FXML
     private void goBackToUnitSummary(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
         Parent parent = loader.load();

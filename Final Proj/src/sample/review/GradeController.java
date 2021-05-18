@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.DatabaseManagers.UserManager;
@@ -28,6 +29,8 @@ public class GradeController {
     TextArea comments, response;
     @FXML
     Text prompt, responseTitle;
+    @FXML
+    TextField gradeField;
 
     private User user;
     private CompletedWrittenQuestion completedWritten;
@@ -64,6 +67,7 @@ public class GradeController {
                 if(c.getUserAnswer().equals(completedWritten.getUserAnswer())){
                     //set the grader comments for c in the database
                     writtenCompletedManager.setGraderComments(c.getUserId(), c.getWrittenId(), c.getGraderId(), comments.getText());
+                    writtenCompletedManager.setNumberGrade(c.getUserId(), c.getWrittenId(), c.getGraderId(), Integer.parseInt(gradeField.getText()));
                     break;
                 }
             }

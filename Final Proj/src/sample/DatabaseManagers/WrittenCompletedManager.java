@@ -123,12 +123,12 @@ public class WrittenCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments,NumberGrade FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
                 if(rs.getInt("WrittenId") == id){
-                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"));
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"),rs.getInt("NumberGrade"));
                     answer.add(temp);
                 }
             }
@@ -174,12 +174,12 @@ public class WrittenCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments,NumberGrade FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
                 if(rs.getInt("GraderId") == id){
-                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"));
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"),rs.getInt("NumberGrade"));
                     answer.add(temp);
                 }
             }
@@ -226,12 +226,12 @@ public class WrittenCompletedManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments FROM WrittenCompleted";
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments,NumberGrade FROM WrittenCompleted";
             ResultSet rs = stmt.executeQuery(sql);
             //STEP 5: Extract data from result set
             while(rs.next()){
                 if(rs.getString("Prompt").equals(name)){
-                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"));
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"),rs.getInt("NumberGrade"));
                     answer.add(temp);
                 }
             }
@@ -280,6 +280,51 @@ public class WrittenCompletedManager {
             String sql;
             int rowInd = getIdByUserWrittenGrader(userId, writtenId, graderId);
             sql = "UPDATE WrittenCompleted " + "SET GraderComments = '" + comments + "' WHERE idWrittenCompleted = " + rowInd;
+            stmt.executeUpdate(sql);
+
+            //STEP 6: Clean-up environment
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public void setNumberGrade(int userId, int writtenId, int graderId, int numGrade){
+
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            int rowInd = getIdByUserWrittenGrader(userId, writtenId, graderId);
+            sql = "UPDATE WrittenCompleted " + "SET NumberGrade = '" + numGrade + "' WHERE idWrittenCompleted = " + rowInd;
             stmt.executeUpdate(sql);
 
             //STEP 6: Clean-up environment

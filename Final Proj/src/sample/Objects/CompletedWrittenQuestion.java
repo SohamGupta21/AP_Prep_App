@@ -7,6 +7,7 @@ public class CompletedWrittenQuestion {
     private int graderId;
     private String graderComments;
     private String userAnswer;
+    private int numberGrade;
     public CompletedWrittenQuestion(String prompt, int writtenId, int userId, String userAnswer){
         this.prompt = prompt;
         this.writtenId = writtenId;
@@ -14,13 +15,14 @@ public class CompletedWrittenQuestion {
         this.userAnswer = userAnswer;
     }
 
-    public CompletedWrittenQuestion(String prompt, int writtenId, int userId, String userAnswer, int graderId, String graderComments){
+    public CompletedWrittenQuestion(String prompt, int writtenId, int userId, String userAnswer, int graderId, String graderComments, int numberGrade){
         this.prompt = prompt;
         this.writtenId = writtenId;
         this.userId = userId;
         this.userAnswer = userAnswer;
         this.graderId = graderId;
         this.graderComments = graderComments;
+        this.numberGrade = numberGrade;
     }
 
     public String getPrompt(){return prompt;}
@@ -29,4 +31,7 @@ public class CompletedWrittenQuestion {
     public int getGraderId(){return graderId;}
     public String getGraderComments(){return graderComments;}
     public String getUserAnswer(){return userAnswer;}
+    public int getNumberGrade(){
+        return numberGrade;
+    }
 }
