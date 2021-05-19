@@ -1,5 +1,6 @@
 package sample.schedule;
 
+import com.mysql.cj.x.protobuf.MysqlxExpr;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +13,14 @@ import sample.Objects.*;
 import sample.home.HomeController;
 import sample.quiz.MultipleChoiceController;
 
+import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class ScheduleController {
 
@@ -112,8 +115,9 @@ public class ScheduleController {
         }
         //we need to remove all of the courses which have a test date that already passed
         for(int d = testDates.size()-1; d>=0;d--){
-            if(testDates.get(d).compareTo(currentDate) < 0){
+            if(testDates.get(d).compareTo(currentDate) <= 0 ){
                 testDates.remove(d);
+                userCourses.remove(d);
             }
         }
         // now we need to order test dates and courses by date
@@ -167,12 +171,104 @@ public class ScheduleController {
         }
     }
 
-    private void applyFormula(){
+    private void applyFormula() throws ParseException {
+        UnitManager unitManager = new UnitManager();
         //get the unit scores from the getUnitScores function
         //this has arraylists whihc represent each course and those have a list of numbers that represent the confidence in each unit
         ArrayList<ArrayList<Double>> unitScores = getUnitScores();
-        for(ArrayList<Double> course : unitScores){
-            for(Double unit : course){
+        //for every course
+        for (int c = 0; c <userCourses.size();c++){
+            //determine the days that we have to work on each unit
+            Date current = new Date();
+            Date test = new SimpleDateFormat("yyyy-MM-dd").parse(userCourses.get(c).getTestDate().substring(0,userCourses.get(c).getTestDate().indexOf(" ")));
+            System.out.println("I am hungry: " + test.toString());
+            System.out.println(TimeUnit.DAYS.convert(test.getTime()-current.getTime(),TimeUnit.MILLISECONDS));
+            double difference = (double) TimeUnit.DAYS.convert(test.getTime()-current.getTime(),TimeUnit.MILLISECONDS);
+            //this has to account for the fact that if there is less than a day's gap then it will think there are 0 days in between
+            if(difference == 0){
+                difference += 1;
+            }
+            //order the units based on their priority
+            ArrayList<Unit> courseUnits = userCourses.get(c).getUnits();
+            ArrayList<Double> scores = unitScores.get(c);
+            //SORTING ALGORITHM <- Mr. Cortez
+            for(int i = 0; i<scores.size(); i++){
+                double minVal = scores.get(i);
+                int minIndex = i;
+                for(int j=i; j < scores.size(); j++){
+                    if(scores.get(j) < scores.get(i)){
+                        minIndex = j;
+                        minVal = scores.get(j);
+                    }
+                }
+                Unit tempUnit = courseUnits.get(i);
+                double tempScore = scores.get(i);
+                courseUnits.set(i, courseUnits.get(minIndex));
+                scores.set(i, minVal);
+                courseUnits.set(minIndex, tempUnit);
+                scores.set(minIndex, tempScore);
+            }
+            //determine the written and multiple choice questions for each unit
+            ArrayList<ArrayList<MCQ>> mcqsPerUnit = new ArrayList<>();
+            ArrayList<ArrayList<WrittenQuestion>> writtenPerUnit = new ArrayList<>();
+            for(int un = 0;un < courseUnits.size();un++){
+                mcqsPerUnit.add(new ArrayList<>());
+                writtenPerUnit.add(new ArrayList<>());
+                for(MCQ mcq : userUncompletedQuestions){
+                    int unitId = unitManager.getUnitByName(mcq.getUnit()).getId();
+                    if(unitId == courseUnits.get(un).getId()){
+                        mcqsPerUnit.get(un).add(mcq);
+                    }
+                }
+                for(WrittenQuestion writtenQuestion : userUncompletedWrittenQuestions){
+                    int unitIdW = unitManager.getUnitByName(writtenQuestion.getUnit()).getId();
+                    if(unitIdW == courseUnits.get(un).getId()){
+                        writtenPerUnit.get(un).add(writtenQuestion);
+                    }
+                }
+            }
+            //divide the assignments across the multiple days
+            //reminder: days for the course = difference variable
+            //adds everything for the mcq
+            ArrayList<ArrayList<MCQ>> mcqDays = new ArrayList<>();
+            System.out.println("Difference: " + difference);
+            for(int d = 0; d < difference; d++){
+                mcqDays.add(new ArrayList<MCQ>());
+            }
+            ArrayList<MCQ> fullMcqs = new ArrayList<>();
+            for(ArrayList<MCQ> a : mcqsPerUnit){
+                for(MCQ m : a){
+                    fullMcqs.add(m);
+                }
+            }
+            int questionsPerDay = fullMcqs.size()/mcqDays.size();
+            for(int dayInd = 0; dayInd < mcqDays.size(); dayInd++){
+                for(int quesCount = 0; quesCount < questionsPerDay; quesCount++){
+                    mcqDays.get(dayInd).add(fullMcqs.remove(0));
+                }
+            }
+            for(int i = 0; i<fullMcqs.size(); i++){
+                mcqDays.get(mcqDays.size()-1).add(fullMcqs.remove(0));
+            }
+            //adds everything for the written
+            ArrayList<ArrayList<WrittenQuestion>> writtenDays = new ArrayList<>();
+            for(int d = 0; d < difference; d++){
+                writtenDays.add(new ArrayList<WrittenQuestion>());
+            }
+            ArrayList<WrittenQuestion> fullWritten = new ArrayList<>();
+            for(ArrayList<WrittenQuestion> a : writtenPerUnit){
+                for(WrittenQuestion w : a){
+                    fullWritten.add(w);
+                }
+            }
+            int questionsPerDayW = fullWritten.size()/writtenDays.size();
+            for(int dayInd = 0; dayInd < writtenDays.size(); dayInd++){
+                for(int quesCount = 0; quesCount < questionsPerDayW; quesCount++){
+                    writtenDays.get(dayInd).add(fullWritten.remove(0));
+                }
+            }
+            for(int i = 0; i<fullWritten.size(); i++){
+                writtenDays.get(writtenDays.size()-1).add(fullWritten.remove(0));
             }
         }
     }
@@ -242,22 +338,6 @@ public class ScheduleController {
             result.add(unitScores);
         }
         return result;
-    }
-    private ArrayList<Double> ordered(ArrayList<Double> list){
-        for(int i = 0; i < list.size(); i++){
-            double min = list.get(i);
-            int minInd = i;
-            for(int j = 0; j < list.size(); j++){
-                if(list.get(j) < min){
-                    min = list.get(j);
-                    minInd = j;
-                }
-            }
-            double temp = list.get(i);
-            list.set(i, min);
-            list.set(minInd, temp);
-        }
-        return list;
     }
 
     private ArrayList<String> splitString(String s){
