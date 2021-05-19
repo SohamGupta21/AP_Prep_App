@@ -157,6 +157,59 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
+
+    public ArrayList<CompletedWrittenQuestion> getByUserId(int id){
+        ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
+        Connection conn = null;
+        Statement stmt = null;
+
+        try{
+            //STEP 2: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
+
+            //STEP 3: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT idWrittenCompleted,Prompt, WrittenId, UserId,GraderId, UserAnswer,GraderComments,NumberGrade FROM WrittenCompleted";
+            ResultSet rs = stmt.executeQuery(sql);
+            //STEP 5: Extract data from result set
+            while(rs.next()){
+                if(rs.getInt("UserId") == id){
+                    CompletedWrittenQuestion temp = new CompletedWrittenQuestion(rs.getString("Prompt"), rs.getInt("WrittenId"), rs.getInt("UserId"),rs.getString("UserAnswer"), rs.getInt("GraderId"), rs.getString("GraderComments"),rs.getInt("NumberGrade"));
+                    answer.add(temp);
+                }
+            }
+            //STEP 6: Clean-up environment
+            rs.close();
+            stmt.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }
+        }
+        return answer;
+    }
+
     public ArrayList<CompletedWrittenQuestion> getByGraderId(int id){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;

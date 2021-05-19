@@ -20,9 +20,11 @@ import sample.classmate.UserSummaryController;
 import sample.course.CourseSummaryController;
 import sample.course.CreateCourseController;
 import sample.review.GradeController;
+import sample.schedule.ScheduleController;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -131,13 +133,18 @@ public class HomeController {
     }
 
     @FXML
-    private void goToSchedule(ActionEvent event) throws IOException{
-        Parent parent = FXMLLoader.load(getClass().getResource("../schedule/schedule.fxml"));
+    private void goToSchedule(ActionEvent event) throws IOException, ParseException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../schedule/schedule.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+
+        ScheduleController scheduleController = loader.getController();
+        scheduleController.setData(user);
+
         window.show();
     }
 

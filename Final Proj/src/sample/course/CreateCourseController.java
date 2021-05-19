@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import sample.DatabaseManagers.UserManager;
 import sample.Objects.Course;
 import sample.Objects.User;
+import sample.home.HomeController;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -35,12 +36,16 @@ public class CreateCourseController {
     }
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("../home/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+        HomeController homeController = loader.getController();
+        //sends a user object to that page
+        homeController.setData(user);
         window.show();
     }
 
