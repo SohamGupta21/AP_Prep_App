@@ -2,6 +2,8 @@ package sample.schedule;
 
 import com.mysql.cj.x.protobuf.MysqlxExpr;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,7 +37,7 @@ public class ScheduleController {
     @FXML
     GridPane calendarGrid;
     @FXML
-    ListView possibleMonths;
+    ListView possibleMonths, mcqs, written, tests;
 
     private User user;
 
@@ -52,10 +54,10 @@ public class ScheduleController {
     private final Button[][] cal = new Button[5][7];
     private ArrayList<ArrayList<Integer>> yearMonthDayCombos = new ArrayList<ArrayList<Integer>>();
 
-    public void setData(User user) throws ParseException {
+    public void setData(User user, ActionEvent e) throws ParseException {
         this.user = user;
         gatherInformation();
-        setUpCalendar();
+        setUpCalendar(e);
     }
     //consolidates all of the information that will be needed in the creation of the formula
     private void gatherInformation(){
@@ -115,7 +117,7 @@ public class ScheduleController {
         }
     }
 
-    private void setUpCalendar() throws ParseException {
+    private void setUpCalendar(ActionEvent e) throws ParseException {
         //creates and orders the test dates as needed
         generateTestDatesArray();
         //create a plan 3d array that contains the entire plan
@@ -123,10 +125,10 @@ public class ScheduleController {
         //applies the math formula that determines what makes the most sense for a user to work on at the time
         applyFormula();
         // at this point the plan array is filled with all of the data that it needs now we need to put it on the screen
-        setUpGridPane();
+        setUpGridPane(e);
     }
 
-    private void setUpGridPane(){
+    private void setUpGridPane(ActionEvent e){
         //add all of the buttons in the gridpane
         int count = 1;
         System.out.println("yoooohooooo");
@@ -140,6 +142,35 @@ public class ScheduleController {
                 calendarGrid.add(cal[r][c], c, r);
                 cal[r][c].setText(Integer.toString(count));
                 count ++;
+            }
+        }
+        // add a function for all of the buttons
+        EventHandler z = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                int rowIndex = GridPane.getRowIndex((Button) event.getSource());
+                int colIndex = GridPane.getColumnIndex((Button) event.getSource());
+                int number = rowIndex * 7 + colIndex + 1;
+                //make the things visible based on the day plan object
+                DayPlan d  = selectedMonth.get(number-1);
+                tests.getItems().clear();
+                mcqs.getItems().clear();
+                written.getItems().clear();
+
+                for(MCQ m : d.getMultipleChoiceQuestions()){
+                    mcqs.getItems().add(m.getQues() + " in " + m.getUnit());
+                }
+                for(WrittenQuestion w : d.getWrittenQuestions()){
+                    written.getItems().add(w.getPrompt() + " in " + w.getUnit());
+                }
+                for(String s : d.getCoursesToTest()){
+                    tests.getItems().add(s);
+                }
+            }
+        };
+        for(int r = 0; r < cal.length; r++){
+            for(int c = 0; c < cal[0].length; c++){
+                cal[r][c].setOnMouseClicked(z);
             }
         }
         //load all the possible months in the listview so the user can select it
@@ -244,7 +275,7 @@ public class ScheduleController {
             int year = Integer.parseInt("1" + testD.substring(2, 4))-earliestYear;
             int month = Integer.parseInt(testD.substring(5, 7))-1;
             int day = Integer.parseInt(testD.substring(8, 10))-1;
-            plan.get(year).get(month).get(day).setIsTestDate(true, c.getName());
+            plan.get(year).get(month).get(day).addTestDate(true, c.getName());
         }
     }
 

@@ -7,14 +7,18 @@ public class DayPlan {
     Date date = new Date();
     boolean isTestDate = false;
     boolean used = false;
-    String courseToTest;
+    ArrayList<String> coursesToTest = new ArrayList<>();
     ArrayList<MCQ> multipleChoiceQuestions = new ArrayList<>();
     ArrayList<WrittenQuestion> writtenQuestions = new ArrayList<>();
 
-    public void setIsTestDate(boolean input, String courseToTest){
+    public void addTestDate(boolean input, String courseToTest){
         used = true;
         isTestDate = input;
-        this.courseToTest = courseToTest;
+        this.coursesToTest.add(courseToTest);
+    }
+
+    public ArrayList<String> getCoursesToTest(){
+        return coursesToTest;
     }
     public boolean getIsTestDate(){
         return isTestDate;
@@ -27,11 +31,19 @@ public class DayPlan {
         }
     }
 
+    public ArrayList<MCQ> getMultipleChoiceQuestions(){
+        return multipleChoiceQuestions;
+    }
+
     public void addWrittenQuestions(ArrayList<WrittenQuestion> writtenQuestions){
         used = true;
         for(WrittenQuestion w : writtenQuestions){
             this.writtenQuestions.add(w);
         }
+    }
+
+    public ArrayList<WrittenQuestion> getWrittenQuestions(){
+        return writtenQuestions;
     }
 
     public boolean getUsed(){

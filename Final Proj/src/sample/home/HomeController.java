@@ -143,7 +143,7 @@ public class HomeController {
         window.setScene(scene);
 
         ScheduleController scheduleController = loader.getController();
-        scheduleController.setData(user);
+        scheduleController.setData(user, event);
 
         window.show();
     }
