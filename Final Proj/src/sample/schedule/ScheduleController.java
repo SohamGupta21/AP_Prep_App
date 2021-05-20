@@ -47,8 +47,10 @@ public class ScheduleController {
     private ArrayList<WrittenQuestion> userUncompletedWrittenQuestions = new ArrayList<>();
     private ArrayList<Date> testDates = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<DayPlan>>> plan = new ArrayList<>();
+    private ArrayList<DayPlan> selectedMonth = new ArrayList<>();
 
     private final Button[][] cal = new Button[5][7];
+    private ArrayList<ArrayList<Integer>> yearMonthDayCombos = new ArrayList<ArrayList<Integer>>();
 
     public void setData(User user) throws ParseException {
         this.user = user;
@@ -139,6 +141,46 @@ public class ScheduleController {
                 cal[r][c].setText(Integer.toString(count));
                 count ++;
             }
+        }
+        //load all the possible months in the listview so the user can select it
+        for(int y = 0; y < plan.size(); y++){
+            for(int m = 0; m < 12; m++){
+                for(int d = 0; d < 31; d++){
+                    if(plan.get(y).get(m).get(d).getUsed()){
+                        ArrayList<Integer> temp = new ArrayList<>();
+                        temp.add(y);
+                        temp.add(m);
+                        temp.add(d);
+                        yearMonthDayCombos.add(temp);
+                    }
+                }
+            }
+        }
+        Date current = new Date();
+        //now that the yearMonthDayCombos array is filled with all of the days that have been used, we can
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        for(ArrayList<Integer> combo : yearMonthDayCombos){
+            String year = "20" + Integer.toString(current.getYear() + combo.get(0)).substring(1);
+            String month = months[combo.get(1)];
+            possibleMonths.getItems().add(month + " " + year);
+        }
+        //remove duplicates
+        ArrayList<String> monthsInList = new ArrayList<>();
+        boolean exists = false;
+        for(int i = 0; i < possibleMonths.getItems().size(); i++){
+            exists = false;
+            for(String s : monthsInList){
+                if(s.equals(possibleMonths.getItems().get(i).toString())){
+                    exists = true;
+                }
+            }
+            if(!exists){
+                monthsInList.add(possibleMonths.getItems().get(i).toString());
+            }
+        }
+        possibleMonths.getItems().clear();
+        for(String s : monthsInList){
+            possibleMonths.getItems().add(s);
         }
     }
 
@@ -412,6 +454,41 @@ public class ScheduleController {
             s = s.substring(s.indexOf("*") + 1);
         }
         return answer;
+    }
+
+    @FXML
+    private void selectMonth(){
+        // this code is to load the actual plan into the calendar
+        String month = possibleMonths.getSelectionModel().getSelectedItem().toString().substring(0, possibleMonths.getSelectionModel().getSelectedItem().toString().indexOf(" "));
+        monthLabel.setText(month);
+        // figure out which month we are working with in plan
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        int planMonthIndex = 0;
+        for(int m = 0; m< 12; m++){
+            if(month.equals(months[m])){
+                planMonthIndex = m;
+            }
+        }
+        //this year is relative to the current year, because that is how the plan listview is set up
+        int planYearIndex = 0;
+        int year = Integer.parseInt("1" + possibleMonths.getSelectionModel().getSelectedItem().toString().substring(possibleMonths.getSelectionModel().getSelectedItem().toString().indexOf(" ") + 3));
+        Date current = new Date();
+        planYearIndex = year - current.getYear();
+        // now we know what index we need in the plan array
+        selectedMonth = plan.get(planYearIndex).get(planMonthIndex);
+        //now we need to make the relevant buttons visible
+        int count = 0;
+        for(int r = 0; r < cal.length; r++){
+            for(int c = 0; c < cal[0].length; c++){
+                if(count > 30){
+                    cal[r][c].setVisible(false);
+                }
+                else if(!selectedMonth.get(count).getUsed()){
+                    cal[r][c].setDisable(true);
+                }
+                count ++;
+            }
+        }
     }
 
     @FXML
