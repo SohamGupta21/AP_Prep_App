@@ -126,6 +126,8 @@ public class ScheduleController {
         applyFormula();
         // at this point the plan array is filled with all of the data that it needs now we need to put it on the screen
         setUpGridPane(e);
+        //this is for testing purposes
+        printPlan();
     }
 
     private void setUpGridPane(ActionEvent e){
@@ -289,13 +291,9 @@ public class ScheduleController {
             //determine the days that we have to work on each unit
             Date current = new Date();
             Date test = new SimpleDateFormat("yyyy-MM-dd").parse(userCourses.get(c).getTestDate().substring(0,userCourses.get(c).getTestDate().indexOf(" ")));
-            System.out.println("I am hungry: " + test.toString());
-            System.out.println(TimeUnit.DAYS.convert(test.getTime()-current.getTime(),TimeUnit.MILLISECONDS));
             double difference = (double) TimeUnit.DAYS.convert(test.getTime()-current.getTime(),TimeUnit.MILLISECONDS);
             //this has to account for the fact that if there is less than a day's gap then it will think there are 0 days in between
-            if(difference == 0){
-                difference += 1;
-            }
+            difference ++;
             //order the units based on their priority
             ArrayList<Unit> courseUnits = userCourses.get(c).getUnits();
             ArrayList<Double> scores = unitScores.get(c);
@@ -317,6 +315,7 @@ public class ScheduleController {
                 scores.set(minIndex, tempScore);
             }
             //determine the written and multiple choice questions for each unit
+            System.out.println("Course " + userCourses.get(c).getName());
             ArrayList<ArrayList<MCQ>> mcqsPerUnit = new ArrayList<>();
             ArrayList<ArrayList<WrittenQuestion>> writtenPerUnit = new ArrayList<>();
             for(int un = 0;un < courseUnits.size();un++){
@@ -489,6 +488,13 @@ public class ScheduleController {
 
     @FXML
     private void selectMonth(){
+        //undisable everything first
+        for(int r = 0; r<5; r++){
+            for(int c = 0; c < 5; c++){
+                cal[r][c].setDisable(false);
+                cal[r][c].setVisible(true);
+            }
+        }
         // this code is to load the actual plan into the calendar
         String month = possibleMonths.getSelectionModel().getSelectedItem().toString().substring(0, possibleMonths.getSelectionModel().getSelectedItem().toString().indexOf(" "));
         monthLabel.setText(month);
@@ -535,5 +541,18 @@ public class ScheduleController {
         //sends a user object to that page
         homeController.setData(user);
         window.show();
+    }
+
+    private void printPlan(){
+        //this function is purely for testing
+        //used to print the plan array
+        for(int i = 0; i < plan.size(); i++){
+            for(int j = 0; j < plan.get(i).size(); j++){
+                for(int k = 0; k < plan.get(i).get(j).size(); k++){
+                    System.out.println(" Year: " + i + " Month: " + j + "Day : " + k);
+                    System.out.println(plan.get(i).get(j).get(k).toString());
+                }
+            }
+        }
     }
 }

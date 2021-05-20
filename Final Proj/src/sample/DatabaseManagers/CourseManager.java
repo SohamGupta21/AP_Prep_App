@@ -18,11 +18,9 @@ public class CourseManager {
             Class.forName(JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
             int rowInd = getRowsOfTable() + 1;
@@ -164,11 +162,9 @@ public class CourseManager {
             Class.forName(JDBC_DRIVER);
 
             //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT idCourses, Name, TestDate, Creator, Members, MCQ, Written, Units FROM Courses";

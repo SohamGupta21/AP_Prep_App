@@ -1,5 +1,6 @@
 package sample.Objects;
 
+import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,6 +49,23 @@ public class DayPlan {
 
     public boolean getUsed(){
         return used;
+    }
+
+    public String toString(){
+        //this function is for testing
+        String answer = "Tests: ";
+        for(String t : coursesToTest){
+            answer += t;
+        }
+        answer += " MCQs: ";
+        for(MCQ m : multipleChoiceQuestions){
+            answer += m.getQues();
+        }
+        answer += " Written ";
+        for(WrittenQuestion w : writtenQuestions){
+            answer += w.getPrompt();
+        }
+        return answer;
     }
 
 }

@@ -37,6 +37,7 @@ public class HomeController {
     private User user;
     private ArrayList<CompletedWrittenQuestion> completedWrittenQuestionsList = new ArrayList<>();
 
+
     public void setData(String userName) {
         UserManager um = new UserManager();
         String[] response = um.getUserInfo(userName);
