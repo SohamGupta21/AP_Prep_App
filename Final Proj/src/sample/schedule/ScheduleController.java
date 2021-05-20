@@ -7,6 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.DatabaseManagers.*;
 import sample.Objects.*;
@@ -20,9 +25,17 @@ import java.util.Date;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class ScheduleController {
+
+    @FXML
+    Label monthLabel;
+    @FXML
+    GridPane calendarGrid;
+    @FXML
+    ListView possibleMonths;
 
     private User user;
 
@@ -34,6 +47,8 @@ public class ScheduleController {
     private ArrayList<WrittenQuestion> userUncompletedWrittenQuestions = new ArrayList<>();
     private ArrayList<Date> testDates = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<DayPlan>>> plan = new ArrayList<>();
+
+    private final Button[][] cal = new Button[5][7];
 
     public void setData(User user) throws ParseException {
         this.user = user;
@@ -105,6 +120,26 @@ public class ScheduleController {
         fillBasicPlan();
         //applies the math formula that determines what makes the most sense for a user to work on at the time
         applyFormula();
+        // at this point the plan array is filled with all of the data that it needs now we need to put it on the screen
+        setUpGridPane();
+    }
+
+    private void setUpGridPane(){
+        //add all of the buttons in the gridpane
+        int count = 1;
+        System.out.println("yoooohooooo");
+        System.out.println(cal.length);
+        System.out.println(cal[0].length);
+        for(int r = 0; r < cal.length; r++){
+            for(int c = 0; c < cal[0].length; c++){
+                cal[r][c] = new Button();
+                cal[r][c].setPrefHeight(106);
+                cal[r][c].setPrefWidth(110);
+                calendarGrid.add(cal[r][c], c, r);
+                cal[r][c].setText(Integer.toString(count));
+                count ++;
+            }
+        }
     }
 
     private void generateTestDatesArray() throws ParseException{
@@ -270,6 +305,33 @@ public class ScheduleController {
             for(int i = 0; i<fullWritten.size(); i++){
                 writtenDays.get(writtenDays.size()-1).add(fullWritten.remove(0));
             }
+            //now, starting with today, we need to add the work of writtendays into the plan
+            int count = 0;
+            int[] daysInMonth = {31,28,31,30,31,30,31,31,30,31,30,31};
+            int year = 0;
+            int month = current.getMonth();
+            int day = current.getDay();
+            while(true){
+                plan.get(year).get(month).get(day).addMultipleChoiceQuestions(mcqDays.get(count));
+                plan.get(year).get(month).get(day).addWrittenQuestions(writtenDays.get(count));
+                if(day % daysInMonth[month] == 0){
+                    if(month == 11){
+                        month = 0;
+                        day = 0;
+                        year +=1;
+                    }else {
+                        month++;
+                        day = 1;
+                    }
+                } else {
+                    day ++;
+                }
+                count ++;
+                if(count == mcqDays.size()){
+                    break;
+                }
+            }
+
         }
     }
 

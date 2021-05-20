@@ -18,12 +18,16 @@ public class DayPlan {
         return isTestDate;
     }
 
-    public void setMultipleChoiceQuestions(ArrayList<MCQ> mcq){
-        multipleChoiceQuestions = mcq;
+    public void addMultipleChoiceQuestions(ArrayList<MCQ> mcq){
+        for(MCQ m : mcq){
+            multipleChoiceQuestions.add(m);
+        }
     }
 
-    public void setWrittenQuestions(ArrayList<WrittenQuestion> writtenQuestions){
-        this.writtenQuestions = writtenQuestions;
+    public void addWrittenQuestions(ArrayList<WrittenQuestion> writtenQuestions){
+        for(WrittenQuestion w : writtenQuestions){
+            this.writtenQuestions.add(w);
+        }
     }
 
 }
