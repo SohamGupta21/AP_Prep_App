@@ -13,7 +13,9 @@ public class DayPlan {
     ArrayList<WrittenQuestion> writtenQuestions = new ArrayList<>();
 
     public void addTestDate(boolean input, String courseToTest){
-        used = true;
+        if(coursesToTest.size() > 0){
+            used = true;
+        }
         isTestDate = input;
         this.coursesToTest.add(courseToTest);
     }
@@ -26,7 +28,9 @@ public class DayPlan {
     }
 
     public void addMultipleChoiceQuestions(ArrayList<MCQ> mcq){
-        used = true;
+        if(mcq.size() > 0){
+            used = true;
+        }
         for(MCQ m : mcq){
             multipleChoiceQuestions.add(m);
         }
@@ -37,7 +41,9 @@ public class DayPlan {
     }
 
     public void addWrittenQuestions(ArrayList<WrittenQuestion> writtenQuestions){
-        used = true;
+        if(writtenQuestions.size() > 0){
+            used = true;
+        }
         for(WrittenQuestion w : writtenQuestions){
             this.writtenQuestions.add(w);
         }
