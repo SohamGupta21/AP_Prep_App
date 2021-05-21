@@ -8,26 +8,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="539.0" style="-fx-background-color: #333a7b#333a7b;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.home.HomeController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.home.HomeController">
    <children>
-      <Label fx:id="userNameLbl" layoutX="208.0" layoutY="14.0" text="User Name" textFill="WHITE">
+      <Label fx:id="userNameLbl" layoutX="375.0" layoutY="41.0" prefHeight="71.0" prefWidth="235.0" text="User Name" textFill="#0f3057">
          <font>
             <Font size="39.0" />
          </font>
       </Label>
-      <Text fill="WHITE" layoutX="67.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Courses:" />
-      <Text fill="WHITE" layoutX="67.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Classmates:" />
-      <Button layoutX="346.0" layoutY="76.0" mnemonicParsing="false" onAction="#goToSchedule" prefHeight="65.0" prefWidth="184.0" style="-fx-background-color: #70c6c7#70c6c7;" text="My Study Schedule" textFill="WHITE" />
-      <Text fill="WHITE" layoutX="406.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily Goals:" />
-      <Hyperlink layoutX="70.0" layoutY="164.0" onAction="#goToCreateCourse" text="+ Add Course" />
-      <Hyperlink layoutX="67.0" layoutY="307.0" onAction="#goToAddClassmate" text="+ Add Classmate" />
-      <Button layoutX="40.0" layoutY="25.0" mnemonicParsing="false" onAction="#goToLogin" style="-fx-background-color: #70c6c7#70c6c7;" text="Sign  Out" textFill="WHITE" />
-      <ListView fx:id="courseList" layoutX="19.0" layoutY="100.0" prefHeight="65.0" prefWidth="199.0" style="-fx-background-color: #4b6982#4b6982;" />
-      <ListView fx:id="classmateList" layoutX="20.0" layoutY="242.0" prefHeight="65.0" prefWidth="199.0" style="-fx-background-color: #4b6982#4b6982;" />
-      <Button layoutX="232.0" layoutY="119.0" mnemonicParsing="false" onAction="#goToCourseSummary" style="-fx-background-color: #70c6c7#70c6c7;" text="Go" textFill="WHITE" />
-      <Button layoutX="232.0" layoutY="261.0" mnemonicParsing="false" onAction="#goToClassmateSummary" style="-fx-background-color: #70c6c7#70c6c7;" text="Go" textFill="WHITE" />
-      <Text fill="WHITE" layoutX="409.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To  Grade:" />
-      <ListView fx:id="toGrade" layoutX="345.0" layoutY="245.0" prefHeight="97.0" prefWidth="184.0" style="-fx-background-color: #4b6982#4b6982;" />
-      <Button layoutX="412.0" layoutY="359.0" mnemonicParsing="false" onAction="#goToGrade" style="-fx-background-color: #70c6c7#70c6c7;" text="Grade" textFill="WHITE" />
+      <Text fill="#0f3057" layoutX="245.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Courses:" />
+      <Text fill="#0f3057" layoutX="236.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Classmates:" />
+      <Button layoutX="610.0" layoutY="164.0" mnemonicParsing="false" onAction="#goToSchedule" prefHeight="116.0" prefWidth="313.0" style="-fx-background-color: #00587a#00587a;" text="My Study Schedule" textFill="WHITE" />
+      <Hyperlink layoutX="237.0" layoutY="292.0" onAction="#goToCreateCourse" text="+ Add Course" />
+      <Hyperlink layoutX="228.0" layoutY="501.0" onAction="#goToAddClassmate" text="+ Add Classmate" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToLogin" style="-fx-background-color: #00587a#00587a;" text="Sign  Out" textFill="WHITE" />
+      <ListView fx:id="courseList" layoutX="82.0" layoutY="164.0" prefHeight="116.0" prefWidth="395.0" style="-fx-background-color: #008891#008891;" />
+      <ListView fx:id="classmateList" layoutX="82.0" layoutY="381.0" prefHeight="116.0" prefWidth="395.0" style="-fx-background-color: #008891#008891;" />
+      <Button layoutX="442.0" layoutY="291.0" mnemonicParsing="false" onAction="#goToCourseSummary" style="-fx-background-color: #00587a#00587a;" text="Go" textFill="WHITE" />
+      <Button layoutX="442.0" layoutY="500.0" mnemonicParsing="false" onAction="#goToClassmateSummary" style="-fx-background-color: #00587a#00587a;" text="Go" textFill="WHITE" />
+      <Text fill="#0f3057" layoutX="738.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To  Grade:" />
+      <ListView fx:id="toGrade" layoutX="610.0" layoutY="324.0" prefHeight="96.0" prefWidth="313.0" style="-fx-background-color: #008891#008891;" />
+      <Button layoutX="741.0" layoutY="439.0" mnemonicParsing="false" onAction="#goToGrade" style="-fx-background-color: #00587a#00587a;" text="Grade" textFill="WHITE" />
    </children>
 </AnchorPane>

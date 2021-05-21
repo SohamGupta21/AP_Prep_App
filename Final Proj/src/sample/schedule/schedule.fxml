@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="604.0" prefWidth="1054.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.schedule.ScheduleController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.schedule.ScheduleController">
    <children>
-      <Label fx:id="monthLabel" layoutX="386.0" layoutY="40.0" text="Month" />
+      <Label fx:id="monthLabel" layoutX="386.0" layoutY="40.0" text="Month" textFill="#0f3057" visible="false" />
       <Hyperlink layoutX="26.0" layoutY="23.0" onAction="#goToHome" text="Back" />
-      <ListView fx:id="possibleMonths" layoutX="819.0" layoutY="95.0" prefHeight="72.0" prefWidth="200.0" />
-      <Text layoutX="898.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Months" />
-      <GridPane fx:id="calendarGrid" gridLinesVisible="true" layoutX="11.0" layoutY="66.0" prefHeight="530.0" prefWidth="770.0">
+      <ListView fx:id="possibleMonths" layoutX="819.0" layoutY="95.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false" />
+      <Text fx:id="monthText" fill="#0f3057" layoutX="898.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Months" visible="false" />
+      <GridPane fx:id="calendarGrid" gridLinesVisible="true" layoutX="11.0" layoutY="66.0" prefHeight="530.0" prefWidth="770.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,12 +34,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Button layoutX="892.0" layoutY="184.0" mnemonicParsing="false" onAction="#selectMonth" text="Select" />
-      <ListView fx:id="mcqs" layoutX="818.0" layoutY="342.0" prefHeight="101.0" prefWidth="200.0" />
-      <ListView fx:id="written" layoutX="819.0" layoutY="480.0" prefHeight="101.0" prefWidth="200.0" />
-      <Text layoutX="900.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MCQs" />
-      <Text layoutX="898.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Written" />
-      <Text layoutX="902.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tests" />
-      <ListView fx:id="tests" layoutX="821.0" layoutY="248.0" prefHeight="72.0" prefWidth="200.0" />
+      <Button fx:id="selectMonthBtn" layoutX="892.0" layoutY="184.0" mnemonicParsing="false" onAction="#selectMonth" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Select" textFill="WHITE" visible="false" />
+      <ListView fx:id="mcqs" layoutX="818.0" layoutY="342.0" prefHeight="101.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false" />
+      <ListView fx:id="written" layoutX="819.0" layoutY="480.0" prefHeight="101.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false" />
+      <Text fx:id="mcqsText" fill="#0f3057" layoutX="900.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MCQs" visible="false" />
+      <Text fx:id="writtenText" fill="#0f3057" layoutX="898.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Written" visible="false" />
+      <Text fx:id="testsText" fill="#0f3057" layoutX="902.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tests" visible="false" />
+      <ListView fx:id="tests" layoutX="821.0" layoutY="248.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false" />
+      <Button fx:id="loadBtn" layoutX="380.0" layoutY="217.0" mnemonicParsing="false" onAction="#loadSchedule" prefHeight="51.0" prefWidth="212.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Load Schedule" textFill="WHITE" />
+      <Label fx:id="progressLabel" alignment="CENTER" layoutX="386.0" layoutY="292.0" prefHeight="20.0" prefWidth="200.0" text="Label" textFill="#0f3057" />
    </children>
 </AnchorPane>

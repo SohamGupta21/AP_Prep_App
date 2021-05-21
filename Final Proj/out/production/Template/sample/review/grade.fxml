@@ -5,18 +5,22 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.GradeController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.GradeController">
    <children>
-      <TextArea fx:id="response" layoutX="50.0" layoutY="100.0" prefHeight="277.0" prefWidth="239.0" />
-      <TextArea fx:id="comments" layoutX="358.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button fx:id="done" layoutX="534.0" layoutY="359.0" mnemonicParsing="false" onAction="#done" text="Done" />
+      <TextArea fx:id="response" layoutX="50.0" layoutY="100.0" prefHeight="456.0" prefWidth="395.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <TextArea fx:id="comments" layoutX="515.0" layoutY="100.0" prefHeight="262.0" prefWidth="239.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <Button fx:id="done" layoutX="552.0" layoutY="478.0" mnemonicParsing="false" onAction="#done" prefHeight="68.0" prefWidth="165.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Done" textFill="WHITE" />
       <Hyperlink fx:id="back" layoutX="50.0" layoutY="33.0" onAction="#goHome" text="Back" />
-      <Text fx:id="prompt" layoutX="285.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt" />
-      <Text fx:id="responseTitle" layoutX="106.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's response" />
-      <Text layoutX="431.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My comments" />
-      <Text layoutX="422.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grade: 1-5" />
-      <TextField fx:id="gradeField" layoutX="416.0" layoutY="333.0" prefHeight="17.0" prefWidth="69.0" />
+      <Text fx:id="prompt" fill="#0f3057" layoutX="416.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt">
+         <font>
+            <Font size="46.0" />
+         </font></Text>
+      <Text fx:id="responseTitle" fill="#0f3057" layoutX="216.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's response" />
+      <Text fill="#0f3057" layoutX="596.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My comments" />
+      <Text fill="#0f3057" layoutX="606.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grade: 1-5" />
+      <TextField fx:id="gradeField" layoutX="552.0" layoutY="406.0" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
    </children>
 </AnchorPane>

@@ -5,17 +5,27 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.classmate.UserSummaryController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.classmate.UserSummaryController">
    <children>
-      <Text layoutX="71.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" />
-      <Text layoutX="425.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classmates" />
-      <ListView fx:id="coursesList" layoutX="24.0" layoutY="142.0" prefHeight="200.0" prefWidth="200.0" />
-      <ListView fx:id="classmatesList" layoutX="357.0" layoutY="148.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="96.0" layoutY="359.0" mnemonicParsing="false" onAction="#viewCourse" text="View" />
+      <Text fill="#0f3057" layoutX="179.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses">
+         <font>
+            <Font size="29.0" />
+         </font></Text>
+      <Text fill="#0f3057" layoutX="605.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Classmates">
+         <font>
+            <Font size="29.0" />
+         </font></Text>
+      <ListView fx:id="coursesList" layoutX="125.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <ListView fx:id="classmatesList" layoutX="576.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <Button layoutX="202.0" layoutY="429.0" mnemonicParsing="false" onAction="#viewCourse" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="View" textFill="WHITE" />
       <Hyperlink layoutX="14.0" layoutY="14.0" onAction="#goToHome" text="Home" />
-      <Button layoutX="436.0" layoutY="359.0" mnemonicParsing="false" onAction="#addCoursePractice" text="View" />
-      <Label fx:id="userName" layoutX="285.0" layoutY="99.0" text="Label" />
+      <Button layoutX="653.0" layoutY="429.0" mnemonicParsing="false" onAction="#addCoursePractice" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="View" textFill="WHITE" />
+      <Label fx:id="userName" layoutX="356.0" layoutY="39.0" text="Label" textFill="#0f3057">
+         <font>
+            <Font size="74.0" />
+         </font></Label>
    </children>
 </AnchorPane>

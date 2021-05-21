@@ -12,8 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.DatabaseManagers.*;
 import sample.Objects.*;
@@ -38,6 +40,13 @@ public class ScheduleController {
     GridPane calendarGrid;
     @FXML
     ListView possibleMonths, mcqs, written, tests;
+    @FXML
+    Label progressLabel;
+    @FXML
+    Button loadBtn, selectMonthBtn;
+    @FXML
+    Text monthText, mcqsText, writtenText, testsText;
+
 
     private User user;
 
@@ -54,8 +63,12 @@ public class ScheduleController {
     private final Button[][] cal = new Button[5][7];
     private ArrayList<ArrayList<Integer>> yearMonthDayCombos = new ArrayList<ArrayList<Integer>>();
 
-    public void setData(User user, ActionEvent e) throws ParseException {
+    public void setData(User user, ActionEvent e){
         this.user = user;
+    }
+    @FXML
+    private void loadSchedule(ActionEvent e) throws ParseException {
+        progressLabel.setText("Gathering data and setting up the calendar...");
         gatherInformation();
         setUpCalendar(e);
     }
@@ -126,8 +139,27 @@ public class ScheduleController {
         applyFormula();
         // at this point the plan array is filled with all of the data that it needs now we need to put it on the screen
         setUpGridPane(e);
-        //this is for testing purposes
-        printPlan();
+//        //this is for testing purposes
+//        printPlan();
+        //make relevant things visible
+        makeThingsVisible();
+    }
+
+    private void makeThingsVisible(){
+        loadBtn.setVisible(false);
+        progressLabel.setVisible(false);
+
+        calendarGrid.setVisible(true);
+        mcqs.setVisible(true);
+        written.setVisible(true);
+        tests.setVisible(true);
+        monthLabel.setVisible(true);
+        possibleMonths.setVisible(true);
+        selectMonthBtn.setVisible(true);
+        monthText.setVisible(true);
+        mcqsText.setVisible(true);
+        writtenText.setVisible(true);
+        testsText.setVisible(true);
     }
 
     private void setUpGridPane(ActionEvent e){
@@ -297,7 +329,7 @@ public class ScheduleController {
             //order the units based on their priority
             ArrayList<Unit> courseUnits = userCourses.get(c).getUnits();
             ArrayList<Double> scores = unitScores.get(c);
-            //SORTING ALGORITHM <- Mr. Cortez
+            //SELECTION SORT ALGORITHM <- Mr. Cortez
             for(int i = 0; i<scores.size(); i++){
                 double minVal = scores.get(i);
                 int minIndex = i;

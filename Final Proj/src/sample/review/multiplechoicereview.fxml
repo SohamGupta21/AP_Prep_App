@@ -5,25 +5,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.MultipleChoiceReviewController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.review.MultipleChoiceReviewController">
    <children>
-      <ListView fx:id="questionsList" layoutX="31.0" layoutY="120.0" prefHeight="200.0" prefWidth="200.0" />
-      <Text layoutX="106.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions:" />
-      <Text layoutX="401.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt" />
-      <Label fx:id="quesLabel" layoutX="255.0" layoutY="103.0" text="Which one is a recursive loop?" />
-      <Text fx:id="yourChoice" layoutX="255.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your choice: A" />
-      <Text fx:id="correctChoice" layoutX="255.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct Choice: B" />
-      <Text layoutX="255.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A)" />
-      <Text layoutX="254.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D)" />
-      <Text layoutX="254.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C)" />
-      <Text layoutX="255.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B)" />
-      <Text fx:id="aChoice" layoutX="273.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
-      <Text fx:id="bChoice" layoutX="273.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
-      <Text fx:id="cChoice" layoutX="273.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
-      <Text fx:id="dChoice" layoutX="273.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
-      <Button layoutX="108.0" layoutY="329.0" mnemonicParsing="false" onAction="#chooseQues" text="Choose" />
-      <Hyperlink layoutX="31.0" layoutY="28.0" onAction="#goToUnitSummary" text="Back" />
+      <ListView fx:id="questionsList" layoutX="283.0" layoutY="182.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <Text fill="#0f3057" layoutX="354.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions:" />
+      <Text fill="#0f3057" layoutX="432.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt">
+         <font>
+            <Font size="53.0" />
+         </font></Text>
+      <Label fx:id="quesLabel" layoutX="512.0" layoutY="141.0" text="Which one is a recursive loop?" textFill="#0f3057" />
+      <Text fx:id="yourChoice" fill="#0f3057" layoutX="610.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your choice: A" />
+      <Text fx:id="correctChoice" fill="#0f3057" layoutX="602.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correct Choice: B" />
+      <Text fill="#0f3057" layoutX="619.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A)" />
+      <Text fill="#0f3057" layoutX="624.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D)" />
+      <Text fill="#0f3057" layoutX="618.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C)" />
+      <Text fill="#0f3057" layoutX="619.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B)" />
+      <Text fx:id="aChoice" fill="#0f3057" layoutX="664.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text fx:id="bChoice" fill="#0f3057" layoutX="664.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text fx:id="cChoice" fill="#0f3057" layoutX="664.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Text fx:id="dChoice" fill="#0f3057" layoutX="664.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample" />
+      <Button layoutX="371.0" layoutY="425.0" mnemonicParsing="false" onAction="#chooseQues" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Choose" textFill="WHITE" />
+      <Hyperlink layoutX="14.0" layoutY="20.0" onAction="#goToUnitSummary" text="Back">
+         <font>
+            <Font size="26.0" />
+         </font></Hyperlink>
    </children>
 </AnchorPane>
