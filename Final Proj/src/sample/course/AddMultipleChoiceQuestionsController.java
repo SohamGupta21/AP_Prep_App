@@ -15,6 +15,7 @@ import sample.Objects.Course;
 import sample.Objects.MCQ;
 import sample.Objects.Unit;
 import sample.Objects.User;
+import sample.home.HomeController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,12 +36,16 @@ public class AddMultipleChoiceQuestionsController {
 
 
     public void updateUser(User user) {
+        //receives data
         this.user = user;
     }
 
-    public void updateCourse(Course c){this.course = c;}
+    public void updateCourse(Course c){
+        //receives data
+        this.course = c;}
 
     public void populateListView(){
+        //displays inputted data
         for(Unit u : course.getUnits()){
             unitsListView.getItems().add(u.getName());
         }
@@ -48,12 +53,17 @@ public class AddMultipleChoiceQuestionsController {
 
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("../home/home.fxml"));
+        //takes the user to the home screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+        HomeController homeController = loader.getController();
+        //sends a user object to that page
+        homeController.setData(user);
         window.show();
     }
     @FXML

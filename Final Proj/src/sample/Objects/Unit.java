@@ -5,6 +5,7 @@ public class Unit {
     private int id;
     private String mcqs;
     private String written;
+    //constructors
     public Unit(String name){
         this.name = name;
     }
@@ -15,6 +16,8 @@ public class Unit {
         this.written = w;
     }
     public Unit(){}
+
+    //getter functions
     public String getName(){
         return name;
     }

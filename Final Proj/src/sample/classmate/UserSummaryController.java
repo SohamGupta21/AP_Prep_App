@@ -14,6 +14,7 @@ import sample.DatabaseManagers.CourseManager;
 import sample.DatabaseManagers.UserManager;
 import sample.Objects.Course;
 import sample.Objects.User;
+import sample.home.HomeController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +78,7 @@ public class UserSummaryController {
     }
 
     private ArrayList<String> splitString(String s){
+        //splits string of ids from database into an arraylist
         ArrayList<String> answer = new ArrayList<>();
         while(s.length() > 0){
             answer.add(s.substring(0, s.indexOf("*")));
@@ -90,15 +92,20 @@ public class UserSummaryController {
 
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("../home/home.fxml"));
+        //takes the user to the home screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+        HomeController homeController = loader.getController();
+        //sends a user object to that page
+        homeController.setData(mainUser);
         window.show();
     }
-
+    //todo finish coding this
     @FXML
     private void viewClassmate(){
 

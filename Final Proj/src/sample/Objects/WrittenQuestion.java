@@ -7,16 +7,19 @@ public class WrittenQuestion {
     private int ID;
 
     public WrittenQuestion(String prompt, String unit){
+        //constructor
         this.prompt = prompt;
         this.unit = unit;
     }
 
     public WrittenQuestion(String prompt, String unit, int id){
+        //constructor with id
         this.prompt = prompt;
         this.unit = unit;
         this.ID = id;
     }
 
+    //get functions
     public String getPrompt(){
         return prompt;
     }

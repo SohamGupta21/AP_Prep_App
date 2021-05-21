@@ -35,6 +35,7 @@ public class AddClassmateController {
     //takes to home screen
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
+        //takes to home screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

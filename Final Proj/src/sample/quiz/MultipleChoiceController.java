@@ -61,10 +61,13 @@ public class MultipleChoiceController {
 
     @FXML
     private void submitData(ActionEvent event) throws IOException{
+        //submits the multiple choice question answer
         MCQ temp = unansweredMcqs.remove(0);
         temp.setSelectedAnswer(answerSelectionList.getSelectionModel().getSelectedItem());
+        //makes a new completed question object
         CompletedQuestion c = new CompletedQuestion(temp.getID(), user.getId(), temp.getSelectedAnswer(), temp.getCorrectChoice());
         answeredMcqs.add(c);
+        //gets ready for the next question to answer
         if(unansweredMcqs.size() >0){
            mcq = unansweredMcqs.get(0);
            displayData();
@@ -82,6 +85,7 @@ public class MultipleChoiceController {
 
     @FXML
     private void goBackToUnitSummary(ActionEvent event) throws IOException {
+        //takes to the unit summary screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

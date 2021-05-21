@@ -31,6 +31,7 @@ public class WrittenResponseController {
     private String writtenQuestion;
 
     public void setData(User user, Course course, Unit unit, String writtenQuestion){
+        //receives data
         this.user = user;
         this.course = course;
         this.unit = unit;
@@ -39,11 +40,13 @@ public class WrittenResponseController {
     }
 
     private void displayData(){
+        //shows the question as the prompt
         prompt.setText(writtenQuestion);
     }
 
     @FXML
     private void goToUnitSummary(ActionEvent event) throws IOException{
+        //takes to unit summary screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -59,16 +62,19 @@ public class WrittenResponseController {
 
     @FXML
     private void submit(ActionEvent event) throws IOException{
+        //allows a user to submit the assignment that they completed
         //create a new written completed database object
         WrittenManager writtenManager = new WrittenManager();
         ArrayList<WrittenQuestion> writtenQuestions = writtenManager.getWrittenByUnitCourse(unit.getName(), course.getName());
         WrittenQuestion actualWrittenQuestion = null;
+        //finds the written question that the user completed
         for(WrittenQuestion w : writtenQuestions){
             if(w.getPrompt().equals(writtenQuestion)){
                 actualWrittenQuestion = w;
                 break;
             }
         }
+        //makes a new completed question
         CompletedWrittenQuestion completedWrittenQuestion = new CompletedWrittenQuestion(writtenQuestion, actualWrittenQuestion.getID(), user.getId(),textArea.getText());
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
         writtenCompletedManager.databaseRegistration(completedWrittenQuestion);

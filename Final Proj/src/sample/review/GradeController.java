@@ -36,13 +36,14 @@ public class GradeController {
     private CompletedWrittenQuestion completedWritten;
 
     public void setData(User user, CompletedWrittenQuestion completedWritten){
+        //receives data
         this.user = user;
         this.completedWritten = completedWritten;
         displayData();
     }
-    //change this to go home
     @FXML
     private void goHome(ActionEvent event) throws IOException{
+        //takes to home screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -59,6 +60,7 @@ public class GradeController {
 
     @FXML
     private void done(ActionEvent event) throws IOException{
+        //saves the data when the person is done editing
         //this should add the comments to the completed question
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
         ArrayList<CompletedWrittenQuestion> possibleQuestions = writtenCompletedManager.getByQuesId(completedWritten.getWrittenId());
@@ -72,10 +74,12 @@ public class GradeController {
                 }
             }
         }
+        //takes to home screen
         goHome(event);
     }
 
     private void displayData(){
+        //shows the data in the fxml objects
         prompt.setText(completedWritten.getPrompt());
         UserManager userManager = new UserManager();
         responseTitle.setText(userManager.getUserInfo(completedWritten.getUserId()).getName() + "'s response");

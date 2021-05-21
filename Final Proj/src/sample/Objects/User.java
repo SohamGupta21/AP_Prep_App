@@ -7,12 +7,13 @@ public class User {
     private String classmates;
 
     public User(int id, String userName, String courses, String classmates){
+        //constructor
         this.id = id;
         this.userName = userName;
         this.courses = courses;
         this.classmates = classmates;
     }
-
+    //getter and setter functions
     public String getName(){
         return userName;
     }

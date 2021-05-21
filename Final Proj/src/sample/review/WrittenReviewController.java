@@ -28,6 +28,7 @@ public class WrittenReviewController {
     private CompletedWrittenQuestion completedWrittenQuestion;
 
     public void setData(User user, Course course, Unit unit, CompletedWrittenQuestion completedWrittenQuestion){
+        //receives data from other screens
         this.user = user;
         this.course = course;
         this.unit = unit;
@@ -37,12 +38,14 @@ public class WrittenReviewController {
     }
 
     public void displayData(){
+        //loads the data into fxml objects
         userResponseText.setText(completedWrittenQuestion.getUserAnswer());
         comments.setText(completedWrittenQuestion.getGraderComments());
     }
 
     @FXML
     public void goToUnitSummary(ActionEvent event) throws IOException{
+        //takes to a user summary screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
