@@ -9,7 +9,7 @@ public class CourseManager {
     private final String PASS = "MySQL2021";
 
     public void databaseRegistration(String name,String testDate, String creator,String members, String multipleChoice, String written, String units){
-
+        //creates a new course
         Connection conn = null;
         Statement stmt = null;
 
@@ -52,7 +52,7 @@ public class CourseManager {
     }
 
     public int getRowsOfTable(){
-
+        //gets the rows of the table
         Connection conn = null;
         Statement stmt = null;
 
@@ -101,6 +101,7 @@ public class CourseManager {
     }
 
     public String getCourseName(int courseId){
+        //uses a course id to get a name
         String answer = "";
         Connection conn = null;
         Statement stmt = null;
@@ -154,6 +155,7 @@ public class CourseManager {
     }
 
     public Course getCourseByName(String courseName){
+        //gets a course object by the name
         Connection conn = null;
         Statement stmt = null;
 

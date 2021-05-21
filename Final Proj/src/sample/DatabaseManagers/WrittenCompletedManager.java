@@ -11,7 +11,7 @@ public class WrittenCompletedManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //creates another written completed object
     public void databaseRegistration(CompletedWrittenQuestion completedWrittenQuestion){
 
         Connection conn = null;
@@ -56,7 +56,7 @@ public class WrittenCompletedManager {
             }
         }
     }
-
+    //gets number of rows of table
     public int getRowsOfTable(){
 
         Connection conn = null;
@@ -105,7 +105,7 @@ public class WrittenCompletedManager {
         }
         return 0;
     }
-
+    //gets all completed questions by a question id
     public ArrayList<CompletedWrittenQuestion> getByQuesId(int id){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;
@@ -157,7 +157,7 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
-
+    //gets all completed questions by a user id
     public ArrayList<CompletedWrittenQuestion> getByUserId(int id){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;
@@ -209,7 +209,7 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
-
+    //gets all completed questions by a grader id
     public ArrayList<CompletedWrittenQuestion> getByGraderId(int id){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;
@@ -261,7 +261,7 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
-
+    //gets all completed questions by a question name
     public ArrayList<CompletedWrittenQuestion> getByQuesName(String name){
         ArrayList<CompletedWrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;
@@ -313,7 +313,7 @@ public class WrittenCompletedManager {
         }
         return answer;
     }
-
+    //sets the comments of a grader
     public void setGraderComments(int userId, int writtenId, int graderId, String comments){
 
         Connection conn = null;
@@ -358,7 +358,7 @@ public class WrittenCompletedManager {
             }
         }
     }
-
+    //sets the grade given by a grader
     public void setNumberGrade(int userId, int writtenId, int graderId, int numGrade){
 
         Connection conn = null;
@@ -403,7 +403,7 @@ public class WrittenCompletedManager {
             }
         }
     }
-
+    //gets the id by the user and written question id
     public int getIdByUserWritten(int userId, int writtenId){
         Connection conn = null;
         Statement stmt = null;
@@ -453,7 +453,7 @@ public class WrittenCompletedManager {
         }
         return 0;
     }
-
+    //gets id by user, writtern and grader ids
     public int getIdByUserWrittenGrader(int userId, int writtenId, int graderId){
         Connection conn = null;
         Statement stmt = null;
@@ -503,7 +503,7 @@ public class WrittenCompletedManager {
         }
         return 0;
     }
-
+    //sets the id of the grader
     public void setGraderId(int userId, int writtenId, int graderId){
 
         Connection conn = null;

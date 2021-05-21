@@ -10,7 +10,7 @@ public class UserManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //checks if a login is valid
     public boolean checkUserInfoRequest(String un, String pw){
 
         Connection conn = null;
@@ -64,7 +64,7 @@ public class UserManager {
         }
         return false;
     }
-
+    //creates a new user
     public void databaseRegistration(String un, String pw){
 
         Connection conn = null;
@@ -109,7 +109,7 @@ public class UserManager {
             }
         }
     }
-
+    //gets number of rows of user table
     private int getRowsOfTable(){
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL = "jdbc:mysql://localhost/FinalProject";
@@ -162,7 +162,7 @@ public class UserManager {
         }
         return 0;
     }
-
+    //gets the user information in an array
     public String[] getUserInfo(String userName){
         String[] answer = new String[4];
         Connection conn = null;
@@ -218,7 +218,7 @@ public class UserManager {
         }
         return answer;
     }
-
+    //gets a user object from an id
     public User getUserInfo(int userId){
         Connection conn = null;
         Statement stmt = null;
@@ -271,7 +271,7 @@ public class UserManager {
         }
         return null;
     }
-
+    //adds a course to a user's information in the database
     public void addCourseToUser(int userId, int courseId){
         Connection conn = null;
         Statement stmt = null;
@@ -319,7 +319,7 @@ public class UserManager {
             }
         }
     }
-
+    //gets the course of a person by their id
     public String getCourses(int userId){
 
         String answer = "";
@@ -375,7 +375,7 @@ public class UserManager {
         }
         return answer;
     }
-
+    //gets classmates of a person by id
     public String getClassmates(int userId){
 
         String answer = "";
@@ -431,7 +431,7 @@ public class UserManager {
         }
         return answer;
     }
-
+    //gets all names in the database
     public ArrayList<String> getNames(){
         ArrayList<String> answer = new ArrayList<>();
 
@@ -482,7 +482,7 @@ public class UserManager {
         }
         return answer;
     }
-
+    //adds a classmate to a user's information in the database
     public void addClassmateToUser(int userId, int classmateId){
         Connection conn = null;
         Statement stmt = null;

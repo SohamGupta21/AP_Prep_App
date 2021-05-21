@@ -11,7 +11,7 @@ public class MCQManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //registers a new MCQ question in database
     public void databaseRegistration(String course, String unit, String question, String A, String B, String C, String D, String correctChoice){
 
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -61,7 +61,7 @@ public class MCQManager {
             }
         }
     }
-
+    //gets the number of rows in the table
     public int getRowsOfTable(){
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL = "jdbc:mysql://localhost/FinalProject";
@@ -168,7 +168,7 @@ public class MCQManager {
         }
         return null;
     }
-
+    //gets the MCQ object by the prompt, unit and course
     public MCQ getMCQByPromptUnitCourse(String prompt, String unit, String course){
 
         Connection conn = null;
@@ -224,7 +224,7 @@ public class MCQManager {
         }
         return null;
     }
-
+    //gets all mcqs that have a certain unit and course
     public ArrayList<MCQ> getMCQsByUnitCourse(String unit, String course){
         ArrayList<MCQ> answer = new ArrayList<>();
         Connection conn = null;

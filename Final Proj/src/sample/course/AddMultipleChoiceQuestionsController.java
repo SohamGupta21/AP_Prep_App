@@ -97,7 +97,7 @@ public class AddMultipleChoiceQuestionsController {
     }
     @FXML
     private void goToWrittenQuestions(ActionEvent event) throws IOException{
-
+        //go to written question screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("addWrittenQuestions.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

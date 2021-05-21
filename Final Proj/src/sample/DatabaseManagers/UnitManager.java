@@ -11,7 +11,7 @@ public class UnitManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //creates a unit object
     public void databaseRegistration(String name, String written, String multipleChoice){
 
         Connection conn = null;
@@ -56,7 +56,7 @@ public class UnitManager {
             }
         }
     }
-
+    //gets rows of a table
     public int getRowsOfTable(){
 
         Connection conn = null;
@@ -105,7 +105,7 @@ public class UnitManager {
         }
         return 0;
     }
-
+    //gets unit by id
     public Unit getUnitById(int unitId){
         Connection conn = null;
         Statement stmt = null;
@@ -158,7 +158,7 @@ public class UnitManager {
         }
         return null;
     }
-
+    //gets all possible units by name
     public ArrayList<Integer> getUnitsByName(String name){
 
         ArrayList<Integer> answer = new ArrayList<>();
@@ -210,7 +210,7 @@ public class UnitManager {
         }
         return answer;
     }
-
+    //gets unit object by name
     public Unit getUnitByName(String unit) {
         Connection conn = null;
         Statement stmt = null;

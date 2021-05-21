@@ -38,23 +38,29 @@ public class AddWrittenQuestionsController {
 
 
     public void updateUser(User user) {
+        //receives data
         this.user = user;
     }
 
-    public void updateCourse(Course course){this.course = course;}
+    public void updateCourse(Course course){
+        //recieves data
+        this.course = course;}
 
     public void populateListView(){
+        //fills list view
         for(Unit u : course.getUnits()){
             unitsListView.getItems().add(u.getName());
         }
     }
 
     private void addQuestionsToCourse(){
+        //adds all of the questions to the course - written since this is a written question screen
         course.addWritten(questions);
     }
 
     @FXML
     public void addWrittenQuestion(){
+        //submits a singular written question
         questions.add(new WrittenQuestion(promptText.getText(), unitsListView.getSelectionModel().getSelectedItem().toString()));
         promptText.clear();
         //writtenManager.databaseRegistration(courseName, unitsListView.getSelectionModel().getSelectedItem().toString(), promptText.getText());
@@ -94,6 +100,7 @@ public class AddWrittenQuestionsController {
             for(WrittenQuestion w : writtenManager.getWrittenByUnitCourse(u.getName(), course.getName())){
                 writtenQuestions += w.getID() + "*";
             }
+            //adding to the database
             unitManager.databaseRegistration(u.getName(), writtenQuestions, multipleChoiceQuestions);
         }
         //create the course and add it to the database with a reference to the units
@@ -105,6 +112,7 @@ public class AddWrittenQuestionsController {
     }
 
     private void takeHome(ActionEvent event) throws IOException{
+        //takes to home screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

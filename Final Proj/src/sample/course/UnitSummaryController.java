@@ -36,6 +36,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToCourseSummary(ActionEvent event) throws IOException {
+        //takes to course summary screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/coursesummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -50,6 +51,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToMultipleChoice(ActionEvent event) throws IOException {
+        //takes to multiple choice screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../quiz/multiplechoice.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -74,6 +76,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToMCQReview(ActionEvent event) throws IOException{
+        //takes to mcq review screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/multiplechoicereview.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -89,6 +92,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToWritten(ActionEvent event) throws IOException{
+        //takes to written screen
         //what is unique about written questions is that you only really do one at a time, unlike multiple choice questions where you do all at once
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../quiz/writtenresponse.fxml"));
         Parent parent = loader.load();
@@ -105,6 +109,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToWrittenReview(ActionEvent event) throws IOException{
+        //takes to written review screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/writtenreview.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -127,6 +132,7 @@ public class UnitSummaryController {
 
     @FXML
     private void goToRequest(ActionEvent event) throws IOException{
+        //takes to screen where a user requests grading
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/askforgrading.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -142,6 +148,7 @@ public class UnitSummaryController {
     }
 
     public void setData(User user, Course course, Unit unit) {
+        //receives data
         this.user = user;
         this.course = course;
         this.unit = unit;
@@ -149,6 +156,7 @@ public class UnitSummaryController {
     }
 
     private void displayData() {
+        //displays data
         title.setText(unit.getName());
         displayMultipleChoice();
         displayWritten();
@@ -162,11 +170,12 @@ public class UnitSummaryController {
         QuestionsCompletedManager questionsCompletedManager = new QuestionsCompletedManager();
         ArrayList<String> splitMCQS = splitString(mcqs);
         MCQManager mcqManager = new MCQManager();
+        //for every mcq question
         for (String m : splitMCQS) {
             MCQ temp = mcqManager.getMCQByID(Integer.parseInt(m));
             ArrayList<CompletedQuestion> cqs = questionsCompletedManager.getByQuesId(Integer.parseInt(m));
-            System.out.println("The cqs are : " + cqs);
             boolean flag = false;
+            //if it is completed then it adds to completed list
             for(CompletedQuestion c : cqs){
                 if(c.getUserId() == user.getId()){
                     completedList.getItems().add(temp.getQues());
@@ -174,6 +183,7 @@ public class UnitSummaryController {
                     flag = true;
                 }
             }
+            //otherwise adds to toComplete list
             if(!flag){
                 toCompleteList.getItems().add(temp.getQues());
             }
@@ -220,6 +230,7 @@ public class UnitSummaryController {
     }
 
     private ArrayList<String> splitString(String s) {
+        //splits string of ids from database into an arraylist
         ArrayList<String> answer = new ArrayList<>();
         while (s.length() > 0) {
             answer.add(s.substring(0, s.indexOf("*")));

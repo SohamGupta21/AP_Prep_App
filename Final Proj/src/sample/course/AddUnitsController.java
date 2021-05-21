@@ -31,6 +31,7 @@ public class AddUnitsController {
 
     @FXML
     public void addUnitToListView(){
+        //fills the units list view
         if(unitField.getText().length() > 0){
             unitsListView.getItems().add(unitField.getText());
             units.add(new Unit(unitField.getText()));
@@ -60,16 +61,7 @@ public class AddUnitsController {
 
     @FXML
     private void goToAddQuestions(ActionEvent event) throws IOException {
-
-        goToMCQQuestions(event);
-
-    }
-
-    private void addUnitsToCourse(){
-        course.addUnits(units);
-    }
-
-    private void goToMCQQuestions(ActionEvent event) throws IOException{
+        //goes to the mcq questions screen
         //loading the scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("addMCQquestions.fxml"));
         Parent parent = loader.load();
@@ -87,6 +79,10 @@ public class AddUnitsController {
         window.show();
 
         addMultipleChoiceQuestionsController.populateListView();
+    }
+
+    private void addUnitsToCourse(){
+        course.addUnits(units);
     }
 
 }

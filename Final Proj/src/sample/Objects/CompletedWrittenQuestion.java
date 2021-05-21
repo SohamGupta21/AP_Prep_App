@@ -9,6 +9,7 @@ public class CompletedWrittenQuestion {
     private String userAnswer;
     private int numberGrade;
     public CompletedWrittenQuestion(String prompt, int writtenId, int userId, String userAnswer){
+        //constructor
         this.prompt = prompt;
         this.writtenId = writtenId;
         this.userId = userId;
@@ -16,6 +17,7 @@ public class CompletedWrittenQuestion {
     }
 
     public CompletedWrittenQuestion(String prompt, int writtenId, int userId, String userAnswer, int graderId, String graderComments, int numberGrade){
+        //constructor with more information
         this.prompt = prompt;
         this.writtenId = writtenId;
         this.userId = userId;
@@ -24,7 +26,7 @@ public class CompletedWrittenQuestion {
         this.graderComments = graderComments;
         this.numberGrade = numberGrade;
     }
-
+    //getter methods
     public String getPrompt(){return prompt;}
     public int getWrittenId(){return writtenId;}
     public int getUserId(){return userId;}

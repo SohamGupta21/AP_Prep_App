@@ -28,10 +28,12 @@ public class RegistrationController {
 
     @FXML
     private void initialize(){
+        //gets link to user table in the database
         userManager = new UserManager();
     }
     @FXML
     private void goBackToLogin(ActionEvent event) throws IOException{
+        //takes back to the login screen
         Parent parent = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene scene = new Scene(parent);
 
@@ -43,6 +45,7 @@ public class RegistrationController {
 
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
+        //goes to the home screen page and passes the necessary data
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -56,9 +59,13 @@ public class RegistrationController {
     }
     @FXML
     private void tryToRegister(ActionEvent event) throws IOException{
+        //tries to register with and acccount
+        //if user input was valid
         if(!possUsername.getText().equals(null) && !possPass.getText().equals(null) &&!possPass2.getText().equals(null)){
             if(possPass.getText().equals(possPass2.getText())){
+                //if passwords match
                 if(!userManager.checkUserInfoRequest(possUsername.getText(), possPass.getText())){
+                    //if a user doesnt already exist then creates a new user with this information
                     userManager.databaseRegistration(possUsername.getText(), possPass.getText());
                     goToHome(event);
                 }else {

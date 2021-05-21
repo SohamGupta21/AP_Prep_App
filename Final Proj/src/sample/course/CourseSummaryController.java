@@ -29,7 +29,7 @@ public class CourseSummaryController {
     @FXML
     Text title;
     @FXML
-    ListView unitsList,goalsList;
+    ListView unitsList;
     @FXML
     Label dateString;
 
@@ -50,6 +50,7 @@ public class CourseSummaryController {
 
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
+        //takes to home screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -63,19 +64,10 @@ public class CourseSummaryController {
         window.show();
     }
 
-    @FXML
-    private void goToWrittenReview(ActionEvent event) throws IOException{
-        Parent parent = FXMLLoader.load(getClass().getResource("../review/writtenreview.fxml"));
-        Scene scene = new Scene(parent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
-        window.show();
-    }
 
     @FXML
     private void goToUnitSummary(ActionEvent event) throws IOException{
+        //takes to unit summary
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/unitsummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -90,34 +82,16 @@ public class CourseSummaryController {
         ArrayList<Integer> possibleIds = unitManager.getUnitsByName(unitsList.getSelectionModel().getSelectedItem().toString());
         //figure out which unit id corresponds to this course
         Unit actualUnit = new Unit();
-        System.out.println("Possible ids: "  + possibleIds);
-        System.out.println("Course Units: " + course.getUnits());
         for(Unit u : course.getUnits()){
             for(Integer i : possibleIds){
-                System.out.println("UNIT ID: " + u.getId());
-                System.out.println("I: " + i);
                 if(u.getId() == i){
-                    System.out.println("THE NULL THING SHOULD NOT GIVE AN ERROR");
                     actualUnit = u;
                     break;
                 }
             }
         }
         //sends the course, unit and user object across
-        System.out.println("Unit name: " +  actualUnit);
         unitSummaryController.setData(user, course, actualUnit);
-        window.show();
-    }
-
-
-    @FXML
-    private void goToMultipleChoiceReview(ActionEvent event) throws IOException{
-        Parent parent = FXMLLoader.load(getClass().getResource("../review/multiplechoicereview.fxml"));
-        Scene scene = new Scene(parent);
-
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(scene);
         window.show();
     }
 }

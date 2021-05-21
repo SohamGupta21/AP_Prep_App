@@ -8,11 +8,14 @@ public class CompletedQuestion {
     private String answer;
     private String correctAnswer;
     public CompletedQuestion(int questionId, int userId, String answer, String correctAnswer){
+        //constructor
         this.questionId = questionId;
         this.userId = userId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
     }
+
+    //getter methods below
 
     public int getQuestionId(){
         return questionId;

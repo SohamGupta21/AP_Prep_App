@@ -32,10 +32,12 @@ public class CreateCourseController {
     private Course course;
 
     public void updateUser(User userObj){
+        //receives data
         user = userObj;
     }
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
+        //takes to home screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -57,7 +59,7 @@ public class CreateCourseController {
 
     @FXML
     private void goToAddUnits(ActionEvent event) throws IOException {
-
+        //takes to add units screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/addunit.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

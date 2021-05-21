@@ -35,11 +35,12 @@ public class LoginController {
 
     @FXML
     private void initialize(){
+        //creates a link to the user table in the database
         userManager = new UserManager();
     }
     @FXML
     private void goToRegisterScreen(ActionEvent event) throws IOException {
-
+        //goes to the screen where registration happens
         Parent parent = FXMLLoader.load(getClass().getResource("registration.fxml"));
         Scene scene = new Scene(parent);
 
@@ -51,6 +52,7 @@ public class LoginController {
 
     @FXML
     private void goToHomeScreen(ActionEvent event) throws IOException{
+        //goes to home screen if information was accurate
         if(userManager.checkUserInfoRequest(usernameField.getText(), passwordField.getText())){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
             Parent parent = loader.load();
@@ -68,63 +70,6 @@ public class LoginController {
 
         }
     }
-
-    private void SQLQueryRequest(String request, String colName){
-        final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://localhost/FinalProject";
-        final String USER = "root";
-        final String PASS = "MySQL2021";
-
-        Connection conn = null;
-        Statement stmt = null;
-
-        try{
-            //STEP 2: Register JDBC driver
-            Class.forName(JDBC_DRIVER);
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-
-            //STEP 4: Execute a query
-            System.out.println("Creating statement...");
-            stmt = conn.createStatement();
-            String sql;
-            sql = request;
-            ResultSet rs = stmt.executeQuery(sql);
-            //STEP 5: Extract data from result set
-            while(rs.next()){
-                //Retrieve by column name
-//                String username  = rs.getString(colName);
-//                answer.add(username);
-//                //Display values
-//                System.out.println("Username: " + username);
-            }
-            //STEP 6: Clean-up environment
-            rs.close();
-            stmt.close();
-            conn.close();
-        }catch(SQLException se){
-            se.printStackTrace();
-        }catch(Exception e){
-            //Handle errors for Class.forName
-            e.printStackTrace();
-        }finally{
-            //finally block used to close resources
-            try{
-                if(stmt!=null)
-                    stmt.close();
-            }catch(SQLException se2){
-            }// nothing we can do
-            try{
-                if(conn!=null)
-                    conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }
-        }
-    }
-
 
 
 }

@@ -12,7 +12,7 @@ public class WrittenManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //creates a new written question
     public void databaseRegistration(String course, String unit, String prompt){
 
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -62,7 +62,7 @@ public class WrittenManager {
             }
         }
     }
-
+    //gets the number of rows of a table
     public int getRowsOfTable(){
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL = "jdbc:mysql://localhost/FinalProject";
@@ -115,7 +115,7 @@ public class WrittenManager {
         }
         return 0;
     }
-
+    //gets a written question by id
     public WrittenQuestion getWrittenById(int writtenId){
         Connection conn = null;
         Statement stmt = null;
@@ -168,7 +168,7 @@ public class WrittenManager {
         }
         return null;
     }
-
+    //gets all written questions by unit and course
     public ArrayList<WrittenQuestion> getWrittenByUnitCourse(String unit, String course){
         ArrayList<WrittenQuestion> answer = new ArrayList<>();
         Connection conn = null;

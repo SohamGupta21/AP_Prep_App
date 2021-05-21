@@ -12,7 +12,7 @@ public class QuestionsCompletedManager {
     private final String DB_URL = "jdbc:mysql://localhost/FinalProject";
     private final String USER = "root";
     private final String PASS = "MySQL2021";
-
+    //creates a new questions completed object
     public void databaseRegistration(CompletedQuestion completedQuestion){
 
         Connection conn = null;
@@ -57,7 +57,7 @@ public class QuestionsCompletedManager {
             }
         }
     }
-
+    //gets the number of rows of a table
     public int getRowsOfTable(){
 
         Connection conn = null;
@@ -106,7 +106,7 @@ public class QuestionsCompletedManager {
         }
         return 0;
     }
-
+    //gets all completed questions of a question id
     public ArrayList<CompletedQuestion> getByQuesId(int id){
         ArrayList<CompletedQuestion> answer = new ArrayList<>();
         Connection conn = null;
@@ -158,7 +158,7 @@ public class QuestionsCompletedManager {
         }
         return answer;
     }
-
+    //gets all completed questions of a user id
     public ArrayList<CompletedQuestion> getByUserId(int id){
         ArrayList<CompletedQuestion> answer = new ArrayList<>();
         Connection conn = null;

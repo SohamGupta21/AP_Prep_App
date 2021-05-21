@@ -37,7 +37,7 @@ public class HomeController {
     private User user;
     private ArrayList<CompletedWrittenQuestion> completedWrittenQuestionsList = new ArrayList<>();
 
-
+    //receives data from login
     public void setData(String userName) {
         UserManager um = new UserManager();
         String[] response = um.getUserInfo(userName);
@@ -47,7 +47,7 @@ public class HomeController {
         loadClassmates();
         loadGrade();
     }
-
+    //receives data from other screens
     public void setData(User user) {
         this.user = user;
         userNameLbl.setText(user.getName());
@@ -60,6 +60,7 @@ public class HomeController {
         String courseString = user.getCourses();
         ArrayList<Integer> courses = new ArrayList<>();
         System.out.println(courseString);
+        //loops through to get the ids of the courses
         while(courseString != null && courseString.length() > 0){
             courses.add(Integer.parseInt(courseString.substring(0, courseString.indexOf("*"))));
             if(courseString.indexOf("*") + 1 > courseString.length() - 1){
@@ -67,25 +68,26 @@ public class HomeController {
             }
             courseString = courseString.substring(courseString.indexOf("*") + 1);
         }
+        //this actually adds it to the listview
         CourseManager courseManager = new CourseManager();
         for(int c : courses){
             courseList.getItems().add(courseManager.getCourseName(c));
         }
     }
 
-
+    //loads the user's classmates
     public void loadClassmates(){
+        //gets the ids of the classmates
         String classmateString = user.getClassmates();
-        System.out.println("Classmate string: " + classmateString);
         ArrayList<Integer> classmates = new ArrayList<>();
         while(classmateString != null && classmateString.length() > 0){
-            System.out.println("THE STRING IS: " + classmateString);
             classmates.add(Integer.parseInt(classmateString.substring(0, classmateString.indexOf("*"))));
             if(classmateString.indexOf("*") + 1 > classmateString.length() - 1){
                 break;
             }
             classmateString = classmateString.substring(classmateString.indexOf("*") + 1);
         }
+        //adds it to the listview
         UserManager userManager = new UserManager();
         for(int c : classmates){
             classmateList.getItems().add(userManager.getUserInfo(c).getName());
@@ -94,6 +96,7 @@ public class HomeController {
 
     @FXML
     private void goToLogin(ActionEvent event) throws IOException {
+        //takes to login screen
         Parent parent = FXMLLoader.load(getClass().getResource("../login/login.fxml"));
         Scene scene = new Scene(parent);
 
@@ -121,6 +124,7 @@ public class HomeController {
 
     @FXML
     private void goToAddClassmate(ActionEvent event) throws IOException{
+        //goes to add classmate screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../classmate/addclassmate.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -135,6 +139,7 @@ public class HomeController {
 
     @FXML
     private void goToSchedule(ActionEvent event) throws IOException, ParseException {
+        //goes to schedule screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../schedule/schedule.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -151,6 +156,7 @@ public class HomeController {
 
     @FXML
     private void goToCourseSummary(ActionEvent event) throws IOException {
+        //goes to course summary page
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/coursesummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -169,6 +175,7 @@ public class HomeController {
 
     @FXML
     private void goToClassmateSummary(ActionEvent event) throws IOException, InterruptedException {
+        //goes to classmate summary page
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../classmate/usersummary.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);
@@ -190,10 +197,10 @@ public class HomeController {
     }
 
     private void loadGrade(){
-        System.out.println("Loading grade");
+        //loads the question that the user has to grade
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
         ArrayList<CompletedWrittenQuestion> completedWrittenQuestions = writtenCompletedManager.getByGraderId(user.getId());
-        System.out.println("By grader: " + completedWrittenQuestions);
+        //looks through the database to see which ones have a grader id of this user but have not been graded yet
         for(CompletedWrittenQuestion c : completedWrittenQuestions){
             if(c.getGraderComments() == null){
                 toGrade.getItems().add(c.getPrompt());
@@ -204,6 +211,7 @@ public class HomeController {
 
     @FXML
     private void goToGrade(ActionEvent event) throws IOException{
+        //goes to gradeing screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../review/grade.fxml"));
         Parent parent = loader.load();
         Scene scene = new Scene(parent);

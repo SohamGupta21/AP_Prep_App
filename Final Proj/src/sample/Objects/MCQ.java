@@ -11,7 +11,7 @@ public class MCQ {
     private final String correctChoice;
     private int ID = 0;
     private String selectedAnswer = "";
-
+    //constructor
     public MCQ(String course, String unit, String ques, String A, String B, String C, String D, String correctChoice) {
         this.course = course;
         this.unit = unit;
@@ -22,6 +22,7 @@ public class MCQ {
         this.D = D;
         this.correctChoice = correctChoice;
     }
+    //constructor
     public MCQ(String course, String unit, String ques, String A, String B, String C, String D, String correctChoice, int ID) {
         this.course = course;
         this.unit = unit;
@@ -33,11 +34,11 @@ public class MCQ {
         this.correctChoice = correctChoice;
         this.ID = ID;
     }
-
+    ///setter
     public void setSelectedAnswer(String sa){
         this.selectedAnswer = sa;
     }
-
+    //getter methods
     public String getSelectedAnswer(){
         return selectedAnswer;
     }
