@@ -31,7 +31,7 @@ public class UserSummaryController {
     ListView coursesList, classmatesList;
 
 
-
+    //allows to pass data into this controller
     public void setData(User mainUser, User userBeingViewed){
         this.mainUser = mainUser;
         this.userBeingViewed = userBeingViewed;
@@ -39,7 +39,7 @@ public class UserSummaryController {
         displayData();
 
     }
-
+    //shows the data on the screen, after the data is passed in
     private void displayData() {
         CourseManager courseManager = new CourseManager();
         if (userBeingViewed.getCourses() != null) {
@@ -57,6 +57,7 @@ public class UserSummaryController {
         if(userBeingViewed.getClassmates() != null){
             UserManager userManager = new UserManager();
             ArrayList<User> userBeingViewedClassmates = new ArrayList<>();
+            ///this loop throught the split string is essentially looping through an id
             for (String s : splitString(userBeingViewed.getClassmates())) {
                 userBeingViewedClassmates.add(userManager.getUserInfo(Integer.parseInt(s)));
             }
@@ -71,7 +72,8 @@ public class UserSummaryController {
 
     @FXML
     private void addCoursePractice(){
-        coursesList.getItems().add("WTF");
+        //todo FIX THIS
+        coursesList.getItems().add("HUH");
     }
 
     private ArrayList<String> splitString(String s){

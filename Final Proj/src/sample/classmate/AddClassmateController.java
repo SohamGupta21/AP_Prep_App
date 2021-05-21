@@ -22,7 +22,7 @@ public class AddClassmateController {
 
     private User user;
     private ArrayList<String> names = new ArrayList<>();
-
+    //allows the user to pass data to this screen
     public void setData(User user){
         this.user = user;
         names = userManager.getNames();
@@ -32,7 +32,7 @@ public class AddClassmateController {
     ListView namesList;
     @FXML
     TextField nameField;
-
+    //takes to home screen
     @FXML
     private void goToHome(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../home/home.fxml"));
@@ -50,8 +50,10 @@ public class AddClassmateController {
 
     @FXML
     private void updateList(){
+        //searching algorithm that allows people to show results after each type
         namesList.getItems().clear();
         String s = nameField.getText();
+        //loops through the people in the users and checks if they match up with what was typed in
         for(String name : names){
             if(s.length() <= name.length()){
                 for(int i = 0; i + s.length() <= name.length(); i++){
@@ -71,8 +73,6 @@ public class AddClassmateController {
         //add the id to the user's database row
         userManager.addClassmateToUser(user.getId(), classmateId);
         nameField.clear();
-        System.out.println("classmate has been added");
-        System.out.println(classmateId);
         user.addClassmate(classmateId);
     }
 

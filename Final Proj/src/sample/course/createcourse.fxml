@@ -17,7 +17,7 @@
          <font>
             <Font size="39.0" />
          </font></Text>
-      <TextField fx:id="courseNameField" layoutX="439.0" layoutY="154.0" prefHeight="72.0" prefWidth="244.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="courseNameField" layoutX="439.0" layoutY="154.0" prefHeight="72.0" prefWidth="244.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
       <DatePicker fx:id="testDateField" layoutX="427.0" layoutY="323.0" prefHeight="72.0" prefWidth="288.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
       <Hyperlink layoutX="17.0" layoutY="25.0" onAction="#goToHome" text="Home" />
       <Hyperlink layoutX="861.0" layoutY="510.0" onAction="#goToAddUnits" text="Next">

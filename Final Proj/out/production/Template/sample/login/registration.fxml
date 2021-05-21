@@ -11,16 +11,16 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.login.RegistrationController">
    <children>
-      <TextField fx:id="possUsername" layoutX="622.0" layoutY="158.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <Text fill="#0f3057" layoutX="482.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-      <Text fill="#0f3057" layoutX="484.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
-      <Text fill="#0f3057" layoutX="461.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" />
-      <PasswordField fx:id="possPass" layoutX="622.0" layoutY="226.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <PasswordField fx:id="possPass2" layoutX="622.0" layoutY="300.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <Button layoutX="671.0" layoutY="382.0" mnemonicParsing="false" onAction="#tryToRegister" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Sign Up" textFill="WHITE" />
-      <Hyperlink layoutX="543.0" layoutY="383.0" onAction="#goBackToLogin" text="Back" />
+      <TextField fx:id="possUsername" layoutX="482.0" layoutY="158.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <Text fill="#0f3057" layoutX="378.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
+      <Text fill="#0f3057" layoutX="380.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
+      <Text fill="#0f3057" layoutX="357.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password:" />
+      <PasswordField fx:id="possPass" layoutX="482.0" layoutY="226.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <PasswordField fx:id="possPass2" layoutX="482.0" layoutY="300.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <Button layoutX="532.0" layoutY="382.0" mnemonicParsing="false" onAction="#tryToRegister" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Sign Up" textFill="WHITE" />
+      <Hyperlink layoutX="418.0" layoutY="383.0" onAction="#goBackToLogin" text="Back" />
       <Label fx:id="registrationNotifier" layoutX="285.0" layoutY="231.0" text="Label" visible="false" />
-      <Text fill="#0f3057" layoutX="581.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP">
+      <Text fill="#0f3057" layoutX="428.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP">
          <font>
             <Font size="56.0" />
          </font>

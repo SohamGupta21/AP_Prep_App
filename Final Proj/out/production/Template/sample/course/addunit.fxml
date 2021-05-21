@@ -14,7 +14,7 @@
          <font>
             <Font size="45.0" />
          </font></Text>
-      <TextField fx:id="unitField" layoutX="184.0" layoutY="164.0" prefHeight="36.0" prefWidth="172.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="unitField" layoutX="184.0" layoutY="164.0" prefHeight="36.0" prefWidth="172.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
       <Text fill="#0f3057" layoutX="620.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Units">
          <font>
             <Font size="46.0" />

@@ -14,7 +14,7 @@
          <font>
             <Font size="36.0" />
          </font></Text>
-      <TextField fx:id="promptText" layoutX="270.0" layoutY="153.0" prefHeight="42.0" prefWidth="158.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="promptText" layoutX="270.0" layoutY="153.0" prefHeight="42.0" prefWidth="158.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
       <Text fill="#0f3057" layoutX="297.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prompt:">
          <font>
             <Font size="33.0" />

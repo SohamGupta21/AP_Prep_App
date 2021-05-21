@@ -21,6 +21,6 @@
       <Text fx:id="responseTitle" fill="#0f3057" layoutX="216.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User's response" />
       <Text fill="#0f3057" layoutX="596.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My comments" />
       <Text fill="#0f3057" layoutX="606.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grade: 1-5" />
-      <TextField fx:id="gradeField" layoutX="552.0" layoutY="406.0" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="gradeField" layoutX="552.0" layoutY="406.0" prefHeight="35.0" prefWidth="165.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
    </children>
 </AnchorPane>

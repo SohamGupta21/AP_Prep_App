@@ -16,11 +16,11 @@
             <Font size="36.0" />
          </font></Text>
       <Text fill="#0f3057" layoutX="270.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question:" />
-      <TextField fx:id="prompt" layoutX="232.0" layoutY="90.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <TextField fx:id="choiceA" layoutX="232.0" layoutY="152.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <TextField fx:id="choiceB" layoutX="232.0" layoutY="209.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <TextField fx:id="choiceC" layoutX="232.0" layoutY="268.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
-      <TextField fx:id="choiceD" layoutX="232.0" layoutY="330.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="prompt" layoutX="232.0" layoutY="90.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <TextField fx:id="choiceA" layoutX="232.0" layoutY="152.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <TextField fx:id="choiceB" layoutX="232.0" layoutY="209.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <TextField fx:id="choiceC" layoutX="232.0" layoutY="268.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
+      <TextField fx:id="choiceD" layoutX="232.0" layoutY="330.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
       <Text layoutX="188.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A)" />
       <Text layoutX="188.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B)" />
       <Text layoutX="187.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C)" />
@@ -29,7 +29,7 @@
       <Hyperlink layoutX="23.0" layoutY="14.0" onAction="#goToUnitsAdd" text="Back to Units" />
       <Hyperlink layoutX="124.0" layoutY="14.0" onAction="#goToHome" text="Home" />
       <Button layoutX="625.0" layoutY="380.0" mnemonicParsing="false" onAction="#addQuestion" prefHeight="54.0" prefWidth="144.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Add Question" textFill="WHITE" />
-      <TextField fx:id="correctChoicePicker" layoutX="232.0" layoutY="407.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" />
+      <TextField fx:id="correctChoicePicker" layoutX="232.0" layoutY="407.0" style="-fx-background-color: #b6e7f2#b6e7f2;" />
       <Hyperlink layoutX="922.0" layoutY="547.0" onAction="#goToWrittenQuestions" text="Next">
          <font>
             <Font size="25.0" />

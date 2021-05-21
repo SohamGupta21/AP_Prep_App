@@ -165,7 +165,6 @@ public class ScheduleController {
     private void setUpGridPane(ActionEvent e){
         //add all of the buttons in the gridpane
         int count = 1;
-        System.out.println("yoooohooooo");
         System.out.println(cal.length);
         System.out.println(cal[0].length);
         for(int r = 0; r < cal.length; r++){
