@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.Objects.CompletedWrittenQuestion;
 import sample.Objects.Course;
@@ -21,6 +22,8 @@ public class WrittenReviewController {
 
     @FXML
     TextArea userResponseText, comments;
+    @FXML
+    Text grade;
 
     private User user;
     private Course course;
@@ -41,6 +44,7 @@ public class WrittenReviewController {
         //loads the data into fxml objects
         userResponseText.setText(completedWrittenQuestion.getUserAnswer());
         comments.setText(completedWrittenQuestion.getGraderComments());
+        grade.setText("Grade: " + completedWrittenQuestion.getNumberGrade());
     }
 
     @FXML

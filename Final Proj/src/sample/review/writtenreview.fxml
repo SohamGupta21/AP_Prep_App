@@ -10,7 +10,7 @@
    <children>
       <Text fill="#0f3057" layoutX="269.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My response: " />
       <Text fill="#0f3057" layoutX="704.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments" />
-      <TextArea fx:id="comments" layoutX="620.0" layoutY="168.0" prefHeight="314.0" prefWidth="209.0" style="-fx-background-color: #008891#008891 #008891#008891;" text="Great essay!" />
+      <TextArea fx:id="comments" layoutX="630.0" layoutY="143.0" prefHeight="314.0" prefWidth="209.0" style="-fx-background-color: #008891#008891 #008891#008891;" text="Great essay!" />
       <TextArea fx:id="userResponseText" layoutX="167.0" layoutY="147.0" prefHeight="391.0" prefWidth="309.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
       <Hyperlink layoutX="29.0" layoutY="14.0" onAction="#goToUnitSummary" text="Back">
          <font>
@@ -21,5 +21,6 @@
             <Font size="47.0" />
          </font>
       </Text>
+      <Text fx:id="grade" fill="#0f3057" layoutX="710.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grade: 5" />
    </children>
 </AnchorPane>
