@@ -68,12 +68,21 @@ public class AddMultipleChoiceQuestionsController {
     }
     @FXML
     private void goToUnitsAdd(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("addunit.fxml"));
+        //takes to add units screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/addunit.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+
+        AddUnitsController addUnitsController = loader.getController();
+
+        addUnitsController.updateUser(user);
+        //creates and sends a course object
+        addUnitsController.setCourse(course);
+
         window.show();
     }
 

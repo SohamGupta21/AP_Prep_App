@@ -74,6 +74,27 @@ public class AddWrittenQuestionsController {
         takeHome(event);
     }
 
+    @FXML
+    private void goToAddQuestions(ActionEvent event) throws IOException{
+        //goes to the mcq questions screen
+        //loading the scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addMCQquestions.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        //sends the data to the next screen
+        AddMultipleChoiceQuestionsController addMultipleChoiceQuestionsController = loader.getController();
+        addMultipleChoiceQuestionsController.updateUser(user);
+        addMultipleChoiceQuestionsController.updateCourse(course);
+
+        window.show();
+
+        addMultipleChoiceQuestionsController.populateListView();
+    }
+
     private void addCourseToDatabase(){
         //create all of the questions and add them to the database
         //add all of the mcqs

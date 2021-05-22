@@ -20,7 +20,6 @@
          </font></Text>
       <ListView fx:id="coursesList" layoutX="125.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
       <ListView fx:id="classmatesList" layoutX="576.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
-      <Button layoutX="202.0" layoutY="429.0" mnemonicParsing="false" onAction="#viewCourse" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="View" textFill="WHITE" />
       <Hyperlink layoutX="14.0" layoutY="14.0" onAction="#goToHome" text="Home" />
       <Button layoutX="653.0" layoutY="429.0" mnemonicParsing="false" onAction="#viewClassmate" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="View" textFill="WHITE" />
       <Label fx:id="userName" layoutX="356.0" layoutY="39.0" text="Label" textFill="#0f3057">

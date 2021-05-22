@@ -122,5 +122,5 @@ public class UserSummaryController {
 
         window.show();
     }
-    
+
 }

@@ -50,12 +50,17 @@ public class AddUnitsController {
 
     @FXML
     private void goToCreateCourse(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("createcourse.fxml"));
+        //travels to the page which allows you to create a course
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../course/createcourse.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         window.setScene(scene);
+        CreateCourseController createCourseController = loader.getController();
+        //sends a user object to that page
+        createCourseController.updateUser(user);
         window.show();
     }
 

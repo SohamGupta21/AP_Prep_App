@@ -9,14 +9,13 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #e7e7de#e7e7de #e7e7de#e7e7de;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.quiz.MultipleChoiceController">
    <children>
-      <Text fill="#0f3057" layoutX="509.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question 7" />
       <Text fx:id="promptText" fill="#0f3057" layoutX="473.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What is the reformation?" />
-      <ListView fx:id="answerSelectionList" layoutX="551.0" layoutY="152.0" prefHeight="166.0" prefWidth="206.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
-      <Label fx:id="aLabel" layoutX="381.0" layoutY="152.0" text="Label" textFill="#0f3057" />
-      <Label fx:id="bLabel" layoutX="381.0" layoutY="207.0" text="Label" textFill="#0f3057" />
-      <Label fx:id="cLabel" layoutX="381.0" layoutY="259.0" text="Label" textFill="#0f3057" />
-      <Label fx:id="dLabel" layoutX="381.0" layoutY="310.0" text="Label" textFill="#0f3057" />
-      <Button layoutX="626.0" layoutY="361.0" mnemonicParsing="false" onAction="#submitData" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Submit" textFill="WHITE" />
+      <ListView fx:id="answerSelectionList" layoutX="370.0" layoutY="340.0" prefHeight="159.0" prefWidth="85.0" style="-fx-background-color: #008891#008891 #008891#008891;" />
+      <Label fx:id="aLabel" layoutX="524.0" layoutY="152.0" text="Label" textFill="#0f3057" />
+      <Label fx:id="bLabel" layoutX="524.0" layoutY="209.0" text="Label" textFill="#0f3057" />
+      <Label fx:id="cLabel" layoutX="525.0" layoutY="253.0" text="Label" textFill="#0f3057" />
+      <Label fx:id="dLabel" layoutX="524.0" layoutY="306.0" text="Label" textFill="#0f3057" />
+      <Button layoutX="511.0" layoutY="406.0" mnemonicParsing="false" onAction="#submitData" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Submit" textFill="WHITE" />
       <Hyperlink layoutX="23.0" layoutY="14.0" onAction="#goBackToUnitSummary" text="Back" />
    </children>
 </AnchorPane>

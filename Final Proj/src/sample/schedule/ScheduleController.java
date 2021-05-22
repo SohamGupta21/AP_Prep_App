@@ -444,10 +444,10 @@ public class ScheduleController {
             System.out.println("Current : " + current);
             //updating the master 3d array list called plan, essentially just loading the information that we got previously
             while(true){
-                System.out.println("Adding to: " + year  + " month: " + month + " day: " + day);
+                System.out.println("Adding to: " + year  + " month: " + month + " day: " + day + " " + dayS);
                 plan.get(year).get(month).get(day).addMultipleChoiceQuestions(mcqDays.get(count));
                 plan.get(year).get(month).get(day).addWrittenQuestions(writtenDays.get(count));
-                if(day % daysInMonth[month] == 0){
+                if(day == daysInMonth[month]-1){
                     if(month == 11){
                         month = 0;
                         day = 0;
@@ -464,7 +464,6 @@ public class ScheduleController {
                     break;
                 }
             }
-
         }
     }
     //INTERESTING CODE
