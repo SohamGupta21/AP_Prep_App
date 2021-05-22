@@ -22,6 +22,7 @@ import sample.Objects.*;
 import sample.home.HomeController;
 import sample.quiz.MultipleChoiceController;
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,8 +41,6 @@ public class ScheduleController {
     GridPane calendarGrid;
     @FXML
     ListView possibleMonths, mcqs, written, tests;
-    @FXML
-    Label progressLabel;
     @FXML
     Button loadBtn, selectMonthBtn;
     @FXML
@@ -69,7 +68,6 @@ public class ScheduleController {
     //when user decides to load the schedule
     @FXML
     private void loadSchedule(ActionEvent e) throws ParseException {
-        progressLabel.setText("Gathering data and setting up the calendar...");
         gatherInformation();
         setUpCalendar(e);
     }
@@ -149,7 +147,6 @@ public class ScheduleController {
     private void makeThingsVisible(){
         //sets things invisible when the database has all loaded
         loadBtn.setVisible(false);
-        progressLabel.setVisible(false);
         //makes things visible
         calendarGrid.setVisible(true);
         mcqs.setVisible(true);
@@ -336,6 +333,7 @@ public class ScheduleController {
             double difference = (double) TimeUnit.DAYS.convert(test.getTime()-current.getTime(),TimeUnit.MILLISECONDS);
             //this has to account for the fact that if there is less than a day's gap then it will think there are 0 days in between
             difference ++;
+            System.out.println("The difference : " + difference);
             //order the units based on their priority
             ArrayList<Unit> courseUnits = userCourses.get(c).getUnits();
             ArrayList<Double> scores = unitScores.get(c);
@@ -357,6 +355,7 @@ public class ScheduleController {
                 courseUnits.set(minIndex, tempUnit);
                 scores.set(minIndex, tempScore);
             }
+            System.out.println("Scores: " + scores);
             //determine the written and multiple choice questions for each unit
             ArrayList<ArrayList<MCQ>> mcqsPerUnit = new ArrayList<>();
             ArrayList<ArrayList<WrittenQuestion>> writtenPerUnit = new ArrayList<>();
@@ -393,10 +392,16 @@ public class ScheduleController {
                 }
             }
             ///adds the number of questions that are necessary for each of the days that we need it for
-            int questionsPerDay = fullMcqs.size()/mcqDays.size();
+            double questionsPerDayDouble = (double)fullMcqs.size()/(double)mcqDays.size();
+            int questionsPerDay = (int)(questionsPerDayDouble + 1);
+            System.out.println("Full mcqs: " + fullMcqs);
+            System.out.println(mcqDays.size());
+            System.out.println("Questions per day: " + questionsPerDay);
             for(int dayInd = 0; dayInd < mcqDays.size(); dayInd++){
                 for(int quesCount = 0; quesCount < questionsPerDay; quesCount++){
-                    mcqDays.get(dayInd).add(fullMcqs.remove(0));
+                    if(fullMcqs.size() > 0){
+                        mcqDays.get(dayInd).add(fullMcqs.remove(0));
+                    }
                 }
             }
             for(int i = 0; i<fullMcqs.size(); i++){
@@ -415,10 +420,13 @@ public class ScheduleController {
                 }
             }
             //adds the questions that are needed to be done in each day
-            int questionsPerDayW = fullWritten.size()/writtenDays.size();
+            double questionsPerDayWDouble = (double)fullWritten.size()/(double)writtenDays.size();
+            int questionsPerDayW = (int)(questionsPerDayWDouble + 1);
             for(int dayInd = 0; dayInd < writtenDays.size(); dayInd++){
                 for(int quesCount = 0; quesCount < questionsPerDayW; quesCount++){
-                    writtenDays.get(dayInd).add(fullWritten.remove(0));
+                    if(fullWritten.size() > 0){
+                        writtenDays.get(dayInd).add(fullWritten.remove(0));
+                    }
                 }
             }
             for(int i = 0; i<fullWritten.size(); i++){
@@ -429,9 +437,14 @@ public class ScheduleController {
             int[] daysInMonth = {31,28,31,30,31,30,31,31,30,31,30,31};
             int year = 0;
             int month = current.getMonth();
-            int day = current.getDay();
+            String dayS = current.toString().substring(current.toString().indexOf(" ")+ 1);
+            dayS = dayS.substring(dayS.indexOf(" ")+ 1);
+            dayS = dayS.substring(0, dayS.indexOf(" "));
+            int day = Integer.parseInt(dayS)-1;
+            System.out.println("Current : " + current);
             //updating the master 3d array list called plan, essentially just loading the information that we got previously
             while(true){
+                System.out.println("Adding to: " + year  + " month: " + month + " day: " + day);
                 plan.get(year).get(month).get(day).addMultipleChoiceQuestions(mcqDays.get(count));
                 plan.get(year).get(month).get(day).addWrittenQuestions(writtenDays.get(count));
                 if(day % daysInMonth[month] == 0){

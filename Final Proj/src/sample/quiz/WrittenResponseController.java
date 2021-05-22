@@ -78,7 +78,5 @@ public class WrittenResponseController {
         CompletedWrittenQuestion completedWrittenQuestion = new CompletedWrittenQuestion(writtenQuestion, actualWrittenQuestion.getID(), user.getId(),textArea.getText());
         WrittenCompletedManager writtenCompletedManager = new WrittenCompletedManager();
         writtenCompletedManager.databaseRegistration(completedWrittenQuestion);
-        //take the user to the unit summary page
-        goToUnitSummary(event);
     }
 }

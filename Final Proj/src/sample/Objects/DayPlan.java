@@ -13,9 +13,7 @@ public class DayPlan {
     ArrayList<WrittenQuestion> writtenQuestions = new ArrayList<>();
     //adds testdates and marks used if applicable, this tells the code that this plan object is not empty
     public void addTestDate(boolean input, String courseToTest){
-        if(coursesToTest.size() > 0){
-            used = true;
-        }
+        used = true;
         isTestDate = input;
         this.coursesToTest.add(courseToTest);
     }

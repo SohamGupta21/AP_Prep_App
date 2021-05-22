@@ -78,7 +78,6 @@ public class MultipleChoiceController {
            for(CompletedQuestion completedQuestion : answeredMcqs){
                //send the data to the database
                questionsCompletedManager.databaseRegistration(completedQuestion);
-               goBackToUnitSummary(event);
            }
        }
     }

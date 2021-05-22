@@ -42,6 +42,5 @@
       <Text fx:id="testsText" fill="#0f3057" layoutX="902.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tests" visible="false" />
       <ListView fx:id="tests" layoutX="821.0" layoutY="248.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #008891#008891 #008891#008891;" visible="false" />
       <Button fx:id="loadBtn" layoutX="380.0" layoutY="217.0" mnemonicParsing="false" onAction="#loadSchedule" prefHeight="51.0" prefWidth="212.0" style="-fx-background-color: #00587a#00587a #00587a#00587a;" text="Load Schedule" textFill="WHITE" />
-      <Label fx:id="progressLabel" alignment="CENTER" layoutX="386.0" layoutY="292.0" prefHeight="20.0" prefWidth="200.0" text="Label" textFill="#0f3057" />
    </children>
 </AnchorPane>

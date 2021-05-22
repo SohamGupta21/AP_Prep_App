@@ -50,7 +50,7 @@ public class UserSummaryController {
             }
             //adds the courses to the listview
             for (String s : userBeingViewedCourses) {
-                classmatesList.getItems().add(s);
+                coursesList.getItems().add(s);
             }
         }
 
@@ -69,12 +69,6 @@ public class UserSummaryController {
         }
         userName.setText(userBeingViewed.getName());
 
-    }
-
-    @FXML
-    private void addCoursePractice(){
-        //todo FIX THIS
-        coursesList.getItems().add("HUH");
     }
 
     private ArrayList<String> splitString(String s){
@@ -105,14 +99,28 @@ public class UserSummaryController {
         homeController.setData(mainUser);
         window.show();
     }
-    //todo finish coding this
-    @FXML
-    private void viewClassmate(){
-
-    }
 
     @FXML
-    private void viewCourse(){
+    private void viewClassmate(ActionEvent event) throws IOException{
+        //goes to classmate summary page with a new user
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../classmate/usersummary.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        window.setScene(scene);
+        UserSummaryController userSummaryController = loader.getController();
+        //get a user object from the username
+        UserManager userManager = new UserManager();
+        int classmateId = Integer.parseInt(userManager.getUserInfo(classmatesList.getSelectionModel().getSelectedItem().toString())[0]);
+        User classmate = userManager.getUserInfo(classmateId);
+        System.out.println("CLASSMATE " + classmate);
+        //send the main user object and the user object that is being viewed to the user summary page
+        userSummaryController.setData(mainUser, classmate);
+
+
+        window.show();
     }
+    
 }
